@@ -1,0 +1,1389 @@
+{% extends 'ins/base.html' %}
+
+{% block title %}Ins{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $('.a_img_con img,.a_img_con video').error(function(){
+            $(this).parents('.article').remove();
+        });
+
+
+
+        $('.exit_pop').click(function () {
+            $('.pop_con').hide();
+            return false
+        });
+
+        $('.qshot_con').click(function () {
+            var username = $(this).find('.r_name span').text();
+            window.location.href = '/blog/'+ username
+        });
+
+        function callen() {
+            var text_list = $('.show_comment_text');
+            $.each(text_list, function () {
+                var text_lenth = $(this).parents('li').find('.ac_content').text().length;
+                if(text_lenth<170){
+                    $(this).hide()
+                }
+            });
+
+        }
+
+        callen();
+
+
+        $('.show_comment_text').click(function () {
+            $(this).parents('li').find('.af_cm_con').css({'display':'inline-block'});
+            $(this).hide()
+        });
+
+
+        var nowpage = 1;
+        var nowclick = null;
+        $('.more_com').click(function () {
+            if(nowclick != this){
+                nowclick = this;
+                nowpage = 1
+            }
+            var shortcode = $(this).parents('.article').attr('id');
+
+            var this_con = $(this);
+
+            $.get('/inext_comment/'+shortcode+'/'+String(nowpage+1), function (dict) {
+
+                if(dict.empty == 'true'){
+                    this_con.hide()
+                }
+                $.each(dict.page, function (index,item) {
+                    var clone_comment = $('.af_cm_con').parents('li:eq(1)').clone(true);
+                    clone_comment.css('display','inline')
+
+                    clone_comment.find('.ac_name').attr('href','/blog/'+item.username);
+                    clone_comment.find('.ac_name').text(item.username);
+                    clone_comment.find('.ac_content').text(item.content);
+                    clone_comment.find('.af_cm_con').attr('id',item.id);
+
+                    if(item.content.length <= 100) {
+                        clone_comment.find('.show_comment_text').remove();
+                    }
+
+
+                    if($.cookie('islogin') != item.username){
+                        clone_comment.find('.delete_comment_icon').remove()
+                    }else {
+                        clone_comment.find('.delete_comment_icon').css('display','inline-block');
+                    }
+
+                    this_con.after(clone_comment)
+
+                });
+
+            });
+            nowpage += 1;
+            return false
+        });
+
+
+
+
+        $('.heart').click(function () {
+            var this_elem = $(this);
+            var shortcode = this_elem.parents('.article').attr('id');
+            var this_like_num = this_elem.parents('.article').find('.like_num');
+            if($.cookie('islogin')){
+                if(this_elem.hasClass('heart_active')){
+                    $.get('/account/remove_like/'+shortcode, function (dict) {
+                        if(dict['result']=='ok'){
+                           this_elem.removeClass('heart_active');
+                           var origin_like_num = Number(this_like_num.text());
+                           var now_like_num = origin_like_num - 1;
+                           this_like_num.text(now_like_num)
+
+                        }
+                    });
+                }else {
+                    $.get('/account/add_like/'+shortcode, function (dict) {
+                        if(dict.result =='ok'){
+                            this_elem.addClass('heart_active');
+                            var origin_like_num = Number(this_like_num.text());
+                            var now_like_num = origin_like_num + 1;
+                            this_like_num.text(now_like_num)
+                        }
+
+                    });
+                }
+
+            }else {
+                window.location.href = '/login'
+            }
+
+        });
+
+        $('.answer').click(function () {
+            $(this).parents('.article').find('input').focus();
+            return false
+        });
+
+        var now_article = '';
+        $('.pc_more').click(function () {
+            var x = $(this).offsetTop;
+            var y = $(this).offsetLeft;
+
+            if($.cookie('islogin')){
+                now_article = $(this).parents('.article');
+                now_article.find('.sign_list').show();
+                $('.sign_friend_con .signfriend').toggle();
+                $(this).toggleClass('pc_moreadd')
+            }else {
+                window.location.href = '/login'
+            }
+
+        });
+
+
+        $('.a_pc .comment_form').submit(function (event) {
+            now_article = $(this).parents('.article');
+            event.preventDefault();
+            var comment_clone = $(this).parents('.article').find('.af_cm_con:eq(0)').clone(true);
+            comment_clone.find('.author_name').removeClass('author_name');
+
+            if($.cookie('islogin')){
+                var this_article = $(this).parents('.article');
+                var content = $(this).find('.com_input').val();
+                var shortcode = this_article.attr('id');
+                var more_con = this_article.find('.more_con');
+                $(this).find('.com_input').val('');
+
+
+                var sign_string = this_article.find('.area_label').text();
+
+                var data = {
+                    'content':content,
+                    'shortcode':shortcode,
+                    'sign_string':sign_string
+                };
+
+                $.post('/article/leave_comment',data, function (dict) {
+                    if(dict.hasOwnProperty('true')){
+                        comment_clone.find('.ac_name').text($.cookie('islogin'));
+                        comment_clone.find('.ac_content').text(content+ ' ' + sign_string);
+                        more_con.after(comment_clone);
+
+                        this_article.find('.sign_list').hide();
+                        this_article.find('.area_label').remove();
+                    }
+                })
+
+
+            }else {
+                window.location.href = '/login';
+            }
+
+        });
+
+        $('.video_con').click(function (event) {
+            var video = $(this).find('video');
+              if (video.hasClass('pause') ) {
+                $('.start_video').hide();
+                video.trigger("play");
+                video.removeClass('pause');
+                video.addClass('play');
+
+              } else {
+                $('.start_video').fadeIn();
+                video.trigger("pause");
+                video.removeClass('play');
+                video.addClass('pause');
+              }
+        });
+
+        var delete_comment_id = '';
+        $('.delete_comment_icon').click(function () {
+            delete_comment_id = $(this).parents('li').find('.af_cm_con').attr('id');
+            $('.delete_com_pop').parents('.pop_con').show()
+
+        });
+
+        $('.confirm_delete').click(function () {
+            $.get('/comment/delete/'+delete_comment_id, function (dict) {
+                if(dict.hasOwnProperty('true')){
+                    $('dr_com_li');
+                    $('.af_cm_con').filter('#'+delete_comment_id).parents('li').remove();
+                    $('.delete_com_pop').parents('.pop_con').hide();
+
+                }
+            });
+
+        });
+
+        function like_event(target_name, this_elem) {
+            if($.cookie('islogin')){
+                if(this_elem.hasClass('likeadd')){
+                    $.get('/account/remove_follow/'+target_name, function (dict) {
+                        if(dict['result']=='ok'){
+                           this_elem.removeClass('likeadd');
+                        }
+                    });
+                }else {
+                    $.get('/account/add_follow/'+target_name, function (dict) {
+                        if(dict.result =='ok'){
+                            this_elem.addClass('likeadd');
+                        }
+
+                    });
+                }
+
+            }else {
+                window.location.href = '/login'
+            }
+        }
+
+        $('.recommend .like').click(function (event) {
+            var this_elem = $(this);
+            var target_name = $(this).parents('.rc_con').find('.rc_name span').text();
+            like_event(target_name, this_elem)
+        });
+
+
+        $('.sign_friend_con .friend_search').keydown(function (event) {
+            var friend_siblings = $('.sign_friend_con .signfriend li');
+            $.each(friend_siblings,function (index, item) {
+                if(item.className != 'signfriend_li_clone'){
+                    item.remove();
+                }
+            });
+
+            var keyword = $('.sign_friend_con .friend_search').val();
+
+            $.get('/account/friend/signfriend/'+keyword, function (dict) {
+                if(dict.hasOwnProperty('true')){
+                    $.each(dict.list, function (index, item) {
+                        var sign_li = $('.sign_friend_con .signfriend_li_clone').clone(true);
+                        sign_li.removeClass('signfriend_li_clone');
+                        sign_li.attr('id',item.id);
+                        sign_li.css('display','block');
+                        sign_li.find('.sign_username').text(item.username);
+
+                        $('.sign_friend_con .signfriend ul').prepend(sign_li)
+                    });
+                }
+            })
+        });
+
+        $('.sign_friend_con .signfriend li').click(function (event) {
+            event.stopPropagation();
+            $('.friend_search').val('');
+            var sign_list = $('.sign_list');
+            var label = $('<a class="area_label" contenteditable="false"><span  class="delete_sign"></span></a>');
+            var target_username = $(this).find('.sign_username').text();
+            var target_id = $(this).attr('id');
+            label.attr('id',target_id).prepend('@'+target_username);
+            sign_list.append(label);
+            sign_list.append(' ');
+
+            now_article.find('.pc_more').toggleClass('pc_moreadd');
+            $('.sign_friend_con .signfriend').hide();
+        });
+
+
+        $(".sign_list").on("click", '.delete_sign',function() {
+            $(this).parents('.area_label').remove();
+            if($(this).parents('.sign_list .area_label').length == 0){
+                $('.sign_list').hide();
+            }
+        });
+
+
+
+
+        var now_article_page = 1;
+        var arealy_load_list = [];
+
+        $(window).scroll(function () {
+            //var last_article_top = $('.article:last').offset().top;
+            var document_height = $(document).height();
+            var scroll_top = $(document).scrollTop();
+
+
+            if (scroll_top > document_height - 1600) {
+                if(arealy_load_list.indexOf(now_article_page) == -1) {
+                    arealy_load_list.push(now_article_page);
+                    $('.loding_con').fadeIn();
+
+                    $.get('/qweasd/' + Number(now_article_page + 1), function (dict) {
+                        $.each(dict.page, function (index, item) {
+                            var ar_clone = $('.article:eq(0)').clone(true);
+                            console.info(ar_clone)
+                            ar_clone.removeClass('article_clone');
+                            ar_clone.css('display', 'block');
+                            ar_clone.attr('id', item.shortcode);
+
+                            if (item['type'] == 'image') {
+                                try {
+                                    ar_clone.find('.video_con').remove();
+                                    ar_clone.find('.a_img_con img').attr("src", "/static/ins/images_storage/" + item.shortcode + "/1.jpg")
+                                } catch (e) {
+                                    console.info(e)
+                                }
+                            } else {
+                                ar_clone.find('.a_img_con img').remove();
+                                ar_clone.find('.video_con video').attr("src", "/static/ins/videos_storage/" + item.shortcode + "/1.mp4")
+                            }
+
+                            ar_clone.find('.h_avat').attr('href', '/blog/' + item.user.username);
+                            ar_clone.find('.h_avat img').attr("src", "/static/ins/avatar/" + item.user.username + ".jpg");
+                            ar_clone.find('.h_name a').attr('href', '/blog/' + item.user.username);
+                            ar_clone.find('.h_name a').text(item.user.username);
+                            if (item.type == 'image') {
+                                ar_clone.find('.a_img_con .video_con').remove();
+                                ar_clone.find('.a_img_con img').attr("src", "/static/ins/images_storage/" + item.shortcode + "/1.jpg");
+                            } else {
+                                ar_clone.find('.a_img_con img').remove();
+                                ar_clone.find('.a_img_con video_con video').attr("src", "/static/ins/videos_storage/" + item.shortcode + "/1.mp4");
+                            }
+
+
+                            if (item.islike == 'false') {
+                                ar_clone.find('.heart').removeClass('heart_active');
+                            }
+
+                            ar_clone.find('.author_name').attr('href', '/blog/' + item.user.username);
+                            ar_clone.find('.author_name').text(item.user.username);
+                            ar_clone.find('.ac_content').text(item.text);
+                            ar_clone.find('.like_num').text(item.likenum);
+
+                            if (item.comments.length < 5) {
+                                ar_clone.find('.more_com').text('');
+                            }
+
+                            $.each(item.comments.reverse(), function (index, item) {
+                                if (index < 5) {
+                                    var clone_comment = $('.comment_clone:eq(0)').clone(true);
+                                    clone_comment.removeClass('comment_clone');
+                                    clone_comment.css('display', 'inline');
+                                    clone_comment.find('.ac_name').attr('href', '/blog/' + item.username);
+                                    clone_comment.find('.ac_name').text(item.username);
+                                    clone_comment.find('.ac_content').text(item.content);
+                                    clone_comment.find('.af_cm_con').attr('id', item.id);
+
+                                    if (item.username == $.cookie('islogin')) {
+                                        clone_comment.find('.delete_comment_icon').css('display', 'none');
+                                    }
+                                    ar_clone.find('.more_con').after(clone_comment)
+                                }
+
+                            });
+
+                            $('.main_left').append(ar_clone)
+
+                        });
+
+                    }).done(function () {
+                        now_article_page += 1;
+                        $('.loding_con').fadeOut();
+                    });
+                }
+
+            }
+
+        });
+
+
+
+
+
+
+    })
+</script>
+{% endblock js %}
+
+{% block style %}
+<style type="text/css">
+	body{
+		background-color: rgb(250,250,250);
+	}
+
+
+	.main{
+		padding-top: 135px;
+		height: 1000px;
+        position: relative;
+	}
+
+	.main_left{
+		margin-right: 28px;
+	    max-width: 614px;
+	    width: 100%;
+		background-color: white;
+		height: 1000px;
+	}
+
+	.main_right{
+	    display: flex;
+	    margin-bottom: 30px;
+	    max-width: 293px;
+	    padding: 0;
+
+	    width: 100%;
+	}
+
+	.article{
+		margin-bottom: 60px;
+	    background-color: #fff;
+	    border: 1px solid #e6e6e6;
+	    border-radius: 3px;
+	    margin-left: -1px;
+	    margin-right: -1px;
+	}
+
+	.article header{
+	    border-bottom: 1px solid #efefef;
+	    align-items: center;
+	    flex-direction: row;
+	    height: 60px;
+	    padding: 16px;
+	}
+
+    .r_stitle{
+        margin-top: 20px;
+    }
+
+    .r_stitle span:nth-child(1){
+        color: #999;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .r_stitle span:nth-child(2){
+        float: right;
+    }
+
+    .r_self li{
+        cursor: pointer;
+    }
+
+
+    .r_self li:nth-child(n+2){
+        margin-top: 20px;
+    }
+
+    .r_name{
+        position: relative;
+        top:10px;
+        margin-left: 12px;
+    }
+
+    .r_time span{
+        position: relative;
+        top:15px;
+        font-size: 10px;
+        line-height: 12px;
+        color: #999;
+        margin-left: 12px;
+    }
+
+    .r_right{
+        display: inline-block;
+    }
+
+
+	.h_avat{
+		width: 30px;
+	    height: 30px;
+	    position: absolute;
+	}
+
+	.h_avat img{
+	    height: 100%;
+    	width: 100%;
+	}
+
+	.h_name{
+		margin-left: 42px;
+		overflow: hidden;
+		line-height: 30px;
+	}
+
+    .a_img_con img{
+    	width: 100%;
+    }
+
+    .a_img_con video{
+        width: 100%;
+    }
+
+    .start_video{
+        background: url(/static/ins/images/start_video.png);
+        position: absolute;
+        height: 135px;
+        width: 135px;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        top: 50%;
+    }
+
+
+	.a_footer {
+	    padding: 0 16px;
+	}
+
+	.af_header {
+    	padding-top: 10px;
+    	height: 40px;
+	}
+
+
+
+
+	.af_header span{
+	    background-image: url(/static/ins/images/icons.png);
+   		background-repeat: no-repeat;
+        width: 24px;
+        height: 24px;
+	}
+
+    .heart{
+        background-position: -408px -156px;
+    }
+
+    .heart_active{
+        background-position: -408px -130px;
+    }
+
+    .answer{
+        margin-left: 10px;
+        background-position: -408px -26px;
+    }
+
+
+
+
+    .af_header span{
+        height: 24px;
+        width: 24px;
+        display: inline-block;
+    }
+
+	.af_like{
+		margin-bottom: 8px;
+		height:18px;
+	}
+
+	.bot4{
+		margin-bottom: 4px;
+	}
+
+	.af_comment{
+		margin-bottom: 4px;
+		margin-top: -5px;
+	    padding-top: 5px;
+	    overflow-anchor: none;
+	}
+
+	.af_comment li{
+        padding-bottom: 6px;
+        position: relative;
+        word-wrap: break-word;
+        margin-top: -5px;
+        padding-top: 5px;
+
+	}
+
+    .af_cm_con{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .af_comment a{
+        font-weight: 600;
+    }
+
+
+
+    .show_comment_text{
+        cursor: pointer;
+        color: #5e5e5e;
+        position: absolute;
+        bottom:-10px;
+        right: 0;
+        z-index: 10;
+    }
+
+
+
+
+
+    .more_com,.a_time span{
+        color: #999;
+    }
+
+    .a_time{
+        margin-bottom: 10px;
+    }
+
+	.a_time span{
+		font-size: 10px;
+    	letter-spacing: .2px;
+	}
+
+	.a_pc{
+        margin-top: 4px;
+       	border-top: 1px solid #efefef;
+	    color: #999;
+	    -webkit-flex-shrink: 0;
+	    -ms-flex-negative: 0;
+	    flex-shrink: 0;
+	    font-size: 14px;
+	    line-height: 18px;
+	    min-height: 56px;
+	    -webkit-box-pack: center;
+	    -webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	    justify-content: center;
+	    padding: 16px 0;
+	    position: relative;
+	}
+
+	.a_pc input{
+        width: 80%;
+    	height: auto;
+        background: 0 0;
+	    border: none;
+	    color: #262626;
+	    font-size: inherit;
+	    outline: none;
+	    padding: 0;
+	    resize: none;
+	    max-height: 80px;
+        word-break:break-all;
+	}
+
+	.pc_more{
+		font-size: 22px;
+        line-height: 22px;
+		position: absolute;
+		right: 0;
+		top: 16px;
+        cursor: pointer;
+	}
+
+
+    .pc_moreadd{
+        color: seagreen !important;
+    }
+
+	.r_self{
+		height: 62px;
+	    border-bottom: 1px solid #efefef;
+	    margin-bottom:12px;
+	    padding: 0;
+	    width: 293px;
+	    display: block;
+	}
+
+	.r_self img{
+		border-radius: 50%;
+		width: 50px;
+    	height: 50px;
+	}
+
+	.mr_name{
+		margin-left: 12px;
+	}
+
+	.quickshot{
+	    color: #999;
+	    float: left;
+	}
+
+	.mr_fa{
+		float: right;
+	}
+
+	.mr_m{
+		margin: 0;
+		height: 18px;
+		width: 100%;
+		display: block;
+	}
+
+    .recommend{
+        width: 590px;
+        height:270px;
+        padding: 20px 15px 20px 25px;
+    }
+    .re_title{
+        color: #999;
+    }
+    .see_all{
+        float: right;
+        color: #3897f0;
+        font-size: 12px;
+        font-weight: 600;
+        margin-right: 5px;
+
+    }
+
+    .re_slide{
+        width: 200px;
+    }
+
+    .re_slide ul{
+        white-space:nowrap
+    }
+
+    .re_slide li{
+        display: inline-block;
+    }
+
+    .rc_con{
+        margin-right: 20px;
+        width: 160px;
+        height:195px;
+        padding: 20px;
+        flex: 0 0 auto;
+        overflow: hidden;
+        border: 1px solid #e6e6e6;
+        margin-top: 10px;
+
+    }
+
+    .r_img_con{
+        display:flex;
+        justify-content:center;
+        display: -webkit-flex;
+        margin-bottom: 20px;
+    }
+
+    .r_img_con img{
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+    }
+
+    .rc_name,.rc_dis{
+        text-align: center;
+        margin-bottom: -10px;
+        margin-top: -10px;
+        overflow: hidden;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .rc_dis span{
+        color: #999;
+    }
+
+    .r_bu_con{
+        margin-top: 10px;
+    }
+
+    .rc_con .like{
+        float: none;
+        top:0;
+        padding: 0 8px;
+        background: #3897f0;
+        border-color: #3897f0;
+        color: #fff;
+        -webkit-appearance: none;
+        border-radius: 3px;
+        border-style: solid;
+        border-width: 1px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 26px;
+        outline: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 128px;
+        height:28px;
+    }
+
+    .rc_con .likeadd{
+        background: 0 0;
+        border-color: #dbdbdb;
+        color: #262626;
+    }
+
+
+
+    /* like_com */
+    .l_main{
+        background-color: white;
+        width: 600px;
+        height: 1000px;
+        margin: 135px auto 0;
+        border: 1px solid #efefef;
+        border-radius: 3px;
+        position: absolute;
+    }
+
+    .l_main li{
+        border-bottom: solid 1px #efefef;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        padding: 8px 16px;
+    }
+
+    .l_img_con img{
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+    }
+
+    .l_user_info{
+        display: inline-block;
+        position: relative;
+        margin-left: 10px;
+        top:8px;
+    }
+
+    .name span{
+        color: #999;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .ver_icon{
+        display: inline-block;
+        margin-left: 8px;
+        background-image: url(/static/ins/images/icons.png);
+        background-position: -434px -226px;
+        position: relative;
+        top:5px;
+        height: 18px;
+        width: 18px;
+    }
+
+    .like{
+        float: right;
+        background: #3897f0;
+        border-color: #3897f0;
+        color: #fff;
+        -webkit-appearance: none;
+        border-radius: 3px;
+        border-style: solid;
+        border-width: 1px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 26px;
+        outline: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        position: relative;
+        top:15px;
+    }
+
+    .l_main{
+        width:500px;
+        height:360px;
+
+    }
+
+    .l_img_con img{
+        width: 34px;
+        height: 34px;
+    }
+
+    .l_username{
+        position: relative;
+        bottom:7px;
+    }
+
+    .likeyou{
+        margin-left: 10px;
+    }
+
+    .likeimg img{
+        height: 40px;
+        min-width: 40px;
+        vertical-align: middle;
+        float: right;
+    }
+
+    .liketime{
+        color: #999;
+        margin-left: 5px;
+        font-size: 15px;
+        line-height: 18px;
+    }
+
+    .l_triangle{
+        background: #fff;
+        border-left: 1px solid #e6e6e6;
+        border-top: 1px solid #e6e6e6;
+        height: 14px;
+
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        width: 14px;
+        z-index: 1;
+        position: absolute;
+        top:-8px;
+        right:40px;
+
+    }
+
+
+    .r_offcial{
+        position: relative;
+        top:120px;
+        padding-top: 25px;
+        border-top: 1px solid #efefef;
+    }
+
+    .r_offcial ul{
+        margin-right: 13px;
+        margin-bottom: 3px;
+    }
+
+    .r_offcial li{
+        margin-top: 3px !important;
+        display: inline-block;
+        color: #c7c7c7;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 13px;
+    }
+
+    .ro_last{
+        margin-top: 18px;
+    }
+
+    .ro_last span{
+        color: #c7c7c7;
+        font-size: 11px;
+    }
+
+
+
+
+
+
+
+
+
+
+</style>
+{% endblock style %}
+
+
+{% block body %}
+    {% load filter_pool %}
+
+	<div class="container">
+		<div class="row">
+			<div class="main col-md-10 col-md-offset-1">
+                <div class="row">
+                    <div class="main_left col-xs-9 col-sm-9 col-md-9">
+                        <div class="article article_clone" id="" style="display: none">
+                            <header>
+                                <div>
+                                    <a class="avatar  h_avat" href="">
+                                        <img  src="">
+                                    </a>
+                                </div>
+                                <div class="h_name" >
+                                    <a  href="">
+
+                                    </a>
+                                </div>
+                            </header>
+                            <div class="a_img_con">
+                                <img src="">
+                                <div class="video_con">
+                                    <video class="pause" src=""></video>
+                                    <span class="start_video"></span>
+                                </div>
+                            </div>
+                            <div class="a_footer">
+                                <div class="af_header">
+                                    <a href=""><span class="heart heart_active" onclick="return false"></span></a>
+                                    <a href=""><span class="answer" onclick="return false"></span></a>
+                                </div>
+                                <div class="af_like">
+                                    <span class="like_num"></span>
+                                    次赞
+                                </div>
+                                <div class="af_comment">
+                                    <ul>
+                                        <li>
+                                            <div class="af_cm_con">
+                                                <a class="ac_name author_name" href="">}</a>
+                                                <span class="author_text ac_content">️</span>
+                                            </div>
+                                            <a href="" onclick="return false" class="show_comment_text">更多</a>
+                                        </li>
+                                        <li class="more_con"><a href="" class="more_com" onclick="return false">加载更多评论</a></li>
+                                        <li class="comment_clone" style="display: none;">
+                                            <div class="af_cm_con" id="">
+                                                <a class="ac_name" href=""></a>
+                                                <span class="ac_content"></span>
+                                            </div>
+                                            <a href="" onclick="return false" class="show_comment_text">更多</a>
+                                            <span class="delete_comment_icon" style="display: none"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="a_time bot4">
+                                    <span>1 小时前</span>
+                                </div>
+                                <div class="a_pc">
+                                    <form class="comment_form">
+                                        {% csrf_token %}
+                                        <input class="com_input" placeholder="添加评论..." type="text" name="">
+                                        <div class="sign_list" style="display: none">@:</div>
+                                    </form>
+                                    <span class="pc_more">@</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        {% for each in page %}
+                        <div class="article" id="{{ each.shortcode }}">
+                            <header>
+                                <div>
+                                    <a class="avatar  h_avat" href="/blog/{{ each.user.username }}">
+                                        <img  src="/static/ins/avatar/{{ each.user.username }}.jpg">
+                                    </a>
+                                </div>
+                                <div class="h_name" >
+                                    <a  href="/blog/{{ each.user.username }}">
+                                        {{ each.user.username }}
+                                    </a>
+                                </div>
+                            </header>
+                            <div class="a_img_con">
+                                {% if each.type == 'image' %}
+                                <img src="/static/ins/images_storage/{{ each.shortcode }}/1.jpg">
+                                {% else %}
+                                <div class="video_con">
+                                    <video class="pause" src="/static/ins/videos_storage/{{ each.shortcode }}/1.mp4"></video>
+                                    <span class="start_video"></span>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="a_footer">
+                                <div class="af_header">
+                                    {% ifequal each|like_veri:request.session.islogin 'true'%}
+                                    <a href=""><span class="heart heart_active" onclick="return false"></span></a>
+                                    {% else %}
+                                    <a href=""><span class="heart" onclick="return false"></span></a>
+                                    {% endifequal%}
+                                    <a href=""><span class="answer" onclick="return false"></span></a>
+                                </div>
+                                <div class="af_like">
+                                    <span class="like_num">{{ each.inslike_set.all | length }}</span>
+                                    次赞
+                                </div>
+                                <div class="af_comment">
+                                    <ul>
+                                        <li>
+                                            <div class="af_cm_con">
+                                                <a class="ac_name author_name" href="/blog/{{ each.user.username }}">{{ each.user.username }}</a>
+                                                <span class="author_text ac_content">{{ each.text}}️</span>
+                                            </div>
+                                            <a href="" onclick="return false" class="show_comment_text">更多</a>
+                                        </li>
+                                        {% if each.inscomment_set.all|length > 5%}
+                                        <li class="more_con"><a href="" class="more_com" onclick="return false">加载更多评论</a></li>
+                                        {% else %}
+                                        <li class="more_con"><a href="" class="more_com" onclick="return false"></a></li>
+                                        {% endif %}
+
+                                        {% for comment in each.inscomment_set.all|dictsortreversed:"pub_time" %}
+                                            {% if forloop.counter < 6 %}
+                                        <li>
+                                            <div class="af_cm_con" id="{{ comment.id}}">
+                                                <a class="ac_name" href="/blog/{{ comment.user.username }}">{{ comment.user.username }}</a>
+                                                <span class="ac_content">{{ comment.content }}</span>
+                                            </div>
+                                            <a href="" onclick="return false" class="show_comment_text">更多</a>
+
+                                            {% if comment.user.username == username %}
+                                            <span class="delete_comment_icon"></span>
+                                            {% else %}
+                                            <span class="delete_comment_icon" style="display: none"></span>
+                                            {% endif %}
+
+                                        </li>
+
+                                        {% endif %}
+
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="a_time bot4">
+                                    <span>1 小时前</span>
+                                </div>
+                                <div class="a_pc">
+                                    <form class="comment_form">
+                                        {% csrf_token %}
+                                        <input class="com_input" placeholder="添加评论..." type="text" name="">
+                                        <div class="sign_list" style="display: none">@:</div>
+                                    </form>
+                                    <span class="pc_more">@</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% if forloop.counter  == 3 %}
+                        <div class="article recommend">
+                            <div class="re_header">
+                                <span class="re_title">推荐用户</span>
+                                <a href="/explore/people"><span class="see_all">全部</span></a>
+                            </div>
+                            <div class="re_slide">
+                                <ul>
+                                    {% for each in random_user %}
+                                    <li>
+                                        <div class="rc_con">
+                                            <a class="r_img_con" href=""><img src="/static/ins/avatar/{{ each.username }}.jpg" alt=""></a>
+                                            <div class="rc_name"><span>{{ each.username }}</span></div>
+                                            <div class="rc_dis"><span>{{ each.about_self }}</span></div>
+                                            <div class="r_bu_con">
+                                                {% ifequal each.full_name|follow_veri:request.session.islogin 'true'%}
+                                                <button class="like likeadd">关注</button>
+                                                {% else %}
+                                                <button class="like">关注</button>
+                                                {% endifequal%}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+
+
+
+
+                        <div class="pop_con " style="display: none;">
+                            <div class="delete_com_pop">
+                                <ul>
+                                    <li><a class="confirm_delete" onclick="return false" href="#">删除评论</a></li>
+                                    <li><a class="exit_pop" onclick="return false" href="#">取消</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                </div>
+                <div class="main_right col-xs-3 col-sm-3 col-md-3">
+                    <div class="r_self">
+                        <ul>
+                            {% if username %}
+                            <li>
+                                <a href="">
+                                    <img src="/static/ins/avatar/{{ username }}.jpg">
+                                    <a class="mr_name" href="">{{ username }}</a>
+                                </a>
+                            </li>
+                            {% endif %}
+
+                            <li class="r_stitle"><span>快拍</span><span>全部播放</span></li>
+                            {% for each in friend_page %}
+                            <li class="qshot_con">
+                                <span><img src="/static/ins/avatar/{{ each.target.username }}.jpg" alt=""></span>
+                                <div class="r_right">
+                                    <div class="r_name"><span >{{ each.target.username }}</span></div>
+                                    <div class="r_time"><span >23 小时前</span></div>
+                                </div>
+                            </li>
+                            {% endfor %}
+
+                            <li class="r_offcial">
+                                <ul>
+                                    <li>关于</li>
+                                    <li>我们</li>
+                                    <li>支持</li>
+                                    <li>博客</li>
+                                    <li>新闻</li>
+                                    <li>中心</li>
+                                    <li>API</li>
+                                    <li>隐私</li>
+                                    <li>条款</li>
+                                    <li>目录</li>
+                                    <li>语言</li>
+                                </ul>
+                                <div class="ro_last"><span>© 2017 INSTAGRAM</span></div>
+                            </li>
+
+
+                        </ul>
+
+                    </div>
+
+                    <div class="mr_m" style="display: none;">
+                        <div class="quickshot">快拍</div>
+                        <div class="quickshot">快拍</div>
+                        <div class="quickshot">快拍</div>
+                        <span class="mr_fa">全部播放</span>
+                    </div>
+                </div>
+            </div>
+
+		</div>
+	    </div>
+
+        <div class="sign_friend_con">
+            <div class="signfriend article_sign" style="display: none;">
+                <div><input  class="friend_search" placeholder="搜索" type="text"></div>
+                <ul>
+                    <li class="signfriend_li_clone" style="display: none;"><span>@</span><span class="sign_username">nihao</span></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="loding_con"><span class="loading"></span></div>
+    <style>
+        .sign_friend_con .signfriend{
+            position: fixed;
+            top: 40%;
+            left:44%;
+        }
+
+        .signfriend .friend_search{
+            background-color: rgb(249,249,249);
+        }
+
+        .sign_list{
+            min-height: 22px;
+            margin-top: 15px;
+            padding: 5px;
+            border-top: 1px solid #dbdbdb;
+        }
+
+        .sign_list .area_label{
+            position: relative;
+            cursor: default;
+        }
+
+        .sign_list .area_label:hover > .delete_sign{
+            background: url(/static/ins/images/delete_sign.png);
+            width: 16px;
+            height:16px;
+        }
+
+        .delete_sign{
+            position: absolute;
+            right: -8px;
+            top: -4px;
+            cursor: pointer;
+        }
+
+    </style>
+
+    <style>
+    .delete_comment_icon{
+        cursor: pointer;
+        background: url(/static/ins/images/delete_comment.png);
+        width:14px;
+        height:14px;
+        position: absolute;
+        right: -10px;
+        bottom: 7px;
+    }
+
+    .pop_con{
+        position: fixed;
+        left: 0;
+        right:0;
+        top:0;
+        bottom:0;
+        background-color: rgba(0,0,0,.5);
+        z-index: 999;
+    }
+
+    .delete_com_pop{
+        width: 510px;
+        position: fixed;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+    }
+
+    .delete_com_pop li{
+        width: 100%;
+        padding: 0 16px;
+        height:50px;
+        background-color: #fff;
+        border-bottom: 1px solid #dbdbdb;
+        text-align: center;
+    }
+
+    .delete_com_pop li a{
+        display: inline-block;
+        width: 100%;
+        height:100%;
+        font-size: 16px;
+        line-height: 50px;
+    }
+
+
+
+
+
+
+    </style>
+    <!--
+    <style>
+        .loding_con{
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height:50px;
+            text-align: center;
+            display: none;
+        }
+
+        .loading{
+            display: inline-block;
+            width:40px ;
+            height:40px;
+            background: url(/static/ins/images/loding_black.png) no-repeat;
+            margin-top: 10px;
+            animation: loding_rotate 0.3s infinite;
+        }
+
+
+
+        @keyframes loding_rotate{
+          0%{
+           transform: rotate(0deg);
+              transform-origin:16px 16px;
+          }
+          100%{
+            transform: rotate(360deg);
+              transform-origin:16px 16px;
+          }
+        }
+    </style>
+    -->
+
+{% endblock body %}

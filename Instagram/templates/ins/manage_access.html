@@ -1,0 +1,273 @@
+{% extends 'ins/base.html' %}
+
+{% block title %}edit{% endblock %}
+
+{% block style %}
+<style type="text/css">
+    body{
+        background-color: rgb(250,250,250);
+    }
+
+    .main{
+        background-color: #fff;
+        border: 1px solid #dbdbdb;
+        border-radius: 3px;
+        flex-direction: row;
+        flex-grow: 1;
+        justify-content: stretch;
+        margin: 150px auto 0;
+        max-width: 935px;
+        overflow: hidden;
+        width: 935px;
+        height:660px;
+        position: relative;
+    }
+
+    .left{
+        border-right: 1px solid #dbdbdb;
+        height:100%;
+        width: 236px;
+        display: inline-block;
+
+    }
+
+
+    .left a{
+        color: #262626;
+        font-weight: 600;
+        border-left: 2px solid transparent;
+        border-left-color: #262626;
+        display: block;
+        font-size: 16px;
+        height: 100%;
+        line-height: 20px;
+        padding: 16px 16px 16px 30px;
+        width: 100%;
+    }
+
+    .left a:hover{
+        background-color:rgb(250,250,250) ;
+        border-left-color: rgb(219,219,219);
+    }
+
+    .right{
+        height:100%;
+        flex: 1 1 400px;
+        width: 690px;
+        display: inline-block;
+        position: absolute;
+        top:0;
+
+    }
+
+    .header{
+        margin: 32px 0 16px;
+
+
+    }
+
+    .avatar{
+        display: inline-block;
+        text-align: center;
+        position: relative;
+        bottom: -7px;
+    }
+
+    .header img{
+        width:36px;
+        height:36px;
+
+
+    }
+
+    .name{
+        display: inline-block;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 42px;
+        margin-left: 30px;
+        height:42px;
+    }
+
+    .header{
+        margin-left: 125px;
+    }
+
+    form{
+        flex-direction: column;
+        margin-bottom: 16px;
+        margin-top: 32px;
+    }
+
+    .f_left{
+        padding-right: 32px;
+        text-align: right;
+        padding-left: 125px;
+        flex: 0 0 194px;
+        box-sizing: border-box;
+        color: #262626;
+        -webkit-box-flex: 0;
+        font-size: 16px;
+        font-weight: 600;
+        float: left;
+        line-height: 33px;
+    }
+
+    .f_right input, textarea, select{
+            background: 0 0;
+            border: 1px solid #efefef;
+            border-radius: 3px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            color: #262626;
+            -webkit-box-flex: 0;
+            -webkit-flex: 0 1 355px;
+            -ms-flex: 0 1 355px;
+            flex: 0 1 355px;
+            font-size: 16px;
+            height: 32px;
+            padding: 0 10px;
+            width: 355px;
+    }
+
+    .f_d{
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .f_d textarea{
+        height: 60px;
+        padding: 6px 10px;
+        resize: vertical;
+    }
+
+    .f_d .privacy{
+        margin-left: 195px;
+        color: #999;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .f_d select{
+        color: #999;
+        width: 130px;
+    }
+
+    .check{
+        width: 13px;
+        height:13px;
+    }
+
+    .sub{
+        display: inline;
+    }
+
+    .sub button{
+        background: #3897f0;
+        border-color: #3897f0;
+        color: #fff;
+        padding: 0 24px;
+        border-radius: 3px;
+        border-style: solid;
+        border-width: 1px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 26px;
+        outline: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 106px;
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+
+    .freeze{
+        color: #3897f0;
+        margin-left: 105px;
+    }
+
+    .home_edit .point{
+        margin-top: 60px;
+        margin-left: 65px;
+
+    }
+
+    .point span{
+        color: #999;
+        font-size: 16px;
+    }
+
+</style>
+    <div class="main">
+        <div class="left">
+            <ul>
+                <li><a href="/account/edit">编辑主页</a></li>
+                <li><a href="/account/chpass">更改密码</a></li>
+                <li><a href="/account/manage_access">授权的应用程序</a></li>
+                <li><a href="/account/comment_filter">评论</a></li>
+                <li><a href="/account/email_set">邮件和短信</a></li>
+                <li><a href="/account/contact_history">管理联系人</a></li>
+            </ul>
+        </div>
+        <div class="right home_edit">
+            <div class="point"><span>你未授权任何应用程序访问 Instagram 帐户。</span></div>
+        </div>
+    </div>
+
+    <div class="official">
+        <div class="off_con">
+            <div class="off_left">
+                <ul>
+                    <li><a>关于我们</a></li>
+                    <li><a>支持</a></li>
+                    <li><a>博客</a></li>
+                    <li><a>新闻</a></li>
+                    <li><a>中心</a></li>
+                    <li><a>API</a></li>
+                    <li><a>工作</a></li>
+                    <li><a>隐私</a></li>
+                    <li><a>条款</a></li>
+                    <li><a>目录</a></li>
+                    <li><a>语言</a></li>
+                    <li class="ofl_right">© 2017 INSTAGRAM</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+<style>
+.official{
+    max-width: 935px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 auto;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 38px 0;
+}
+
+
+
+.off_left li{
+    display: inline-block;
+    margin-bottom: 7px;
+    margin-right: 16px;
+}
+
+.off_left li a{
+    color: #003569;
+    text-decoration: none;
+}
+
+.ofl_right{
+    float: right;
+}
+
+</style>
+
+
+
+{% endblock %}

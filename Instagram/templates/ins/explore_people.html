@@ -1,0 +1,201 @@
+{% extends 'ins/base.html' %}
+
+{% block style %}
+
+{% block js %}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.main img').error(function(){
+            $(this).attr('src','/static/ins/images/default_avatar.png')
+        });
+
+        $('.main .like').click(function (event) {
+            this_elem = $(this);
+            if($.cookie('islogin')){
+                var target_name = $(this).parents('li').find('.username span:eq(0)').text();
+                if($(this).hasClass('likeadd')){
+                    $.get('/account/remove_follow/'+target_name, function (dict) {
+                        if(dict['result']=='ok'){
+                           this_elem.removeClass('likeadd');
+                        }
+                    });
+                }else {
+                    $.get('/account/add_follow/'+target_name, function (dict) {
+                        if(dict.result =='ok'){
+                            this_elem.addClass('likeadd');
+                        }
+
+                    });
+                }
+
+            }else {
+                window.location.href = '/login'
+            }
+            return false
+
+        });
+
+
+    })
+</script>
+{% endblock %}
+
+<style type="text/css">
+
+    body{
+        background-color: rgb(250,250,250);
+    }
+
+    .main{
+        background-color: white;
+        width: 600px;
+        margin: 135px auto 0;
+        border: 1px solid #efefef;
+        border-radius: 3px;
+    }
+
+    .main li{
+        border-bottom: solid 1px #efefef;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        padding: 8px 16px;
+    }
+
+    .img_con img{
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+    }
+
+    .user_info{
+        display: inline-block;
+        position: relative;
+        margin-left: 10px;
+        top:8px;
+    }
+
+    .name span{
+        color: #999;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .ver_icon{
+        display: inline-block;
+        margin-left: 8px;
+        background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/8ab5506869d8.png);
+        background-position: -434px -226px;
+        position: relative;
+        top:5px;
+        height: 18px;
+        width: 18px;
+    }
+
+    .like{
+        float: right;
+        background: #3897f0;
+        border-color: #3897f0;
+        color: #fff;
+        -webkit-appearance: none;
+        border-radius: 3px;
+        border-style: solid;
+        border-width: 1px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 26px;
+        outline: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        position: relative;
+        top:15px;
+    }
+
+    .likeadd{
+        background: 0 0;
+        border-color: #dbdbdb;
+        color: #262626;
+    }
+
+    .bottom_official{
+        margin: 50px auto;
+        text-align: center;
+
+
+    }
+    .bottom_official ul{
+        margin: 0 auto;
+        width: 300px;
+    }
+
+    .bottom_official li{
+        display: inline-block;
+        margin:0 16px 7px 0;
+        color: #003569;
+        text-decoration: none;
+    }
+
+    .bo_last span{
+        font-size: 12px;
+        color: #999;
+    }
+
+</style>
+{% endblock style %}
+
+
+
+{% block body %}
+    {% load filter_pool %}
+    <div class="main">
+        <ul>
+            {% for user in users %}
+            <li>
+                <div>
+                    <span class="img_con"><img src="/static/ins/avatar/{{ user.username }}.jpg" alt=""></span>
+                    <div class="user_info">
+                        <div class="username"><a href="/blog/{{ user.username }}"><span>{{ user.full_name }}</span></a><span class="ver_icon"></span></div>
+                        <div class="name"><span>{{ user.about_self }}</span></div>
+                    </div>
+                    {% ifequal user.full_name|follow_veri:request.session.islogin 'true'%}
+                    <span><button class="like likeadd">关注</button></span>
+                    {% else %}
+                    <span><button class="like">关注</button></span>
+                    {% endifequal%}
+
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="bottom_official">
+            <ul>
+                <li>关于</li>
+                <li>我们</li>
+                <li>支持</li>
+                <li>博客</li>
+                <li>新闻</li>
+                <li>中心</li>
+                <li>API</li>
+                <li>隐私</li>
+                <li>条款</li>
+                <li>目录</li>
+                <li>语言</li>
+            </ul>
+        <div class="bo_last"><span>© 2017 INSTAGRAM</span></div>
+    </div>
+
+{% endblock body %}

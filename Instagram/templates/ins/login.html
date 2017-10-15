@@ -1,0 +1,282 @@
+{% extends 'ins/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block js%}
+
+{% endblock js %}
+
+{% block style %}
+<style type="text/css">
+
+    body{
+        background-color: rgb(250,250,250);
+    }
+
+    .login_con{
+        position: fixed;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+
+    }
+
+    .lg_t,.lg_b{
+        background-color: #fff;
+        border: 1px solid #e6e6e6;
+        border-radius: 1px;
+        margin: 0 0 10px;
+        padding: 10px 0;
+    }
+
+    .lg_t{
+        width: 350px;
+    }
+
+    .lg_t h1{
+        margin: 22px auto 8px;
+        background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/8ab5506869d8.png);
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        height: 51px;
+        width: 175px;
+    }
+
+    .input_con{
+        align-items: center;
+        border-radius: 3px;
+        box-sizing: border-box;
+        color: #262626;
+        flex-direction: row;
+        font-size: 14px;
+        position: relative;
+        -webkit-appearance: none;
+        border: 1px solid #efefef;
+        margin: 0 40px 6px;
+    }
+
+    .lg_t input{
+        background: #fafafa;
+        border: 0;
+        flex: 1 0 0;
+        outline: none;
+        overflow: hidden;
+        padding: 9px 0 7px 8px;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+
+    .sub{
+        margin: 12px 40px;
+    }
+
+    .sub button{
+        padding: 0 8px;
+        cursor: pointer;
+        background: #3897f0;
+        border-color: #3897f0;
+        color: #fff;
+        -webkit-appearance: none;
+        border-radius: 3px;
+        border-style: solid;
+        border-width: 1px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 26px;
+        outline: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .forget{
+        margin-top: 12px;
+        text-align: center;
+    }
+
+    .forget a{
+        font-size: 12px;
+        line-height: 14px;
+        margin-top: 12px;
+        text-align: center;
+    }
+
+    .lg_b{
+        width: 350px;
+    }
+
+    .regi{
+        color: #262626;
+        font-size: 14px;
+        margin: 15px;
+        text-align: center;
+    }
+
+    .regi a{
+        color: #3897f0;
+    }
+
+    .regi a:active{
+        opacity: .5;
+    }
+
+    .con1 h1{
+        margin:20px 0;
+        height:0;
+    }
+
+    .con1 h2{
+        font-size: 17px;
+        line-height: 20px;
+        margin: 0 40px 10px;
+        text-align: center;
+        color: #999;
+        font-weight: 600;
+    }
+
+    .con2 h2{
+        font-size: 17px;
+        line-height: 20px;
+        margin: 0 40px 10px;
+        text-align: center;
+        color: #999;
+        font-weight: 600;
+    }
+
+    .aggre{
+        color: #999;
+        margin: 10px 60px;
+        font-size: 14px;
+        line-height: 18px;
+        text-align: center;
+    }
+
+
+
+</style>
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('.to_regi,.to_logi').click(function () {
+            var t_class = $(this).attr('class');
+            if(t_class.indexOf('to_regi') != -1){
+                $('.con1').hide();
+                $('.con2').show();
+            }else {
+                $('.con2').hide();
+                $('.con1').show();
+            }
+
+            return false
+            
+        });
+
+
+        $('.logi_form, .regi_form').submit(function (event) {
+		    event.preventDefault();
+		    if(event.target.className == 'logi_form'){
+				var name = $(this).find('#logi_username').val();
+				var password = $(this).find('#logi_password').val();
+				data = {'name':name, 'password':password};
+				$.post("/account/signin",data ,function (dict) {
+					if(dict.hasOwnProperty('false')){
+                        alert(dict.false);
+
+					}else if(dict.hasOwnProperty('true')){
+					    window.location.href = '/home';
+					}
+				});
+
+			}else if(event.target.className == 'regi_form'){
+		        var regi_email = $(this).find('#regi_email').val();
+		        var regi_full_name = $(this).find('#regi_full_name').val();
+		        var regi_username = $(this).find('#regi_username').val();
+		        var regi_password = $(this).find('#regi_password').val();
+		        if(!regi_email.match(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/)){
+                    alert("邮箱格式不正确！请重新输入");
+                    $("#regi_email").focus();
+                    return false
+                }
+
+		        data = {'email':regi_email, 'full_name':regi_full_name, 'username':regi_username, 'password':regi_password};
+		        $.post("/account/signup",data ,function (dict) {
+					if(dict.hasOwnProperty('false')){
+                        alert(dict.false)
+					}else if (dict.hasOwnProperty('true')){
+						alert('注册成功,请登录');
+						window.location.replace("/login");
+					}
+				});
+			}
+
+
+
+        });
+
+        /* else if(event.target.className == 'find_passform'){
+		        var name = $(this).find('#vername').val();
+		        $.get('/findpass/'+name,function (dict) {
+					if(dict.hasOwnProperty('wrong')){
+						$('.find_pass .remind').text(dict.wrong).show();
+					}else if (dict.hasOwnProperty('true')){
+						$('.find_pass .remind').text('邮箱已经发送到'+dict.true+',前往验证').css({'font-size':'22px'}).show().siblings().hide();
+						$('.find_pass .sign_title').text('邮箱已经发送,前往验证');
+						$('.find_pass .fsubmit').hide();
+					}
+                })
+			}   */
+
+
+
+
+
+    })
+</script>
+
+
+{% endblock style %}
+
+{% block body %}
+    <div class="login_con con1">
+        <div class="lg_t">
+            <div>
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            </div>
+            <div><h2>又是美好的一天</h2></div>
+            <form action="/account/register" class="logi_form">
+                <div class="input_con"><input type="text" placeholder="用户名或邮箱" id="logi_username" name="logi_username"></div>
+                <div class="input_con"><input type="password" placeholder="密码" id="logi_password" name="logi_password"></div>
+                <div class="sub">
+                    <button type="submit" id="logi_sub">登录</button>
+                </div>
+            </form>
+            <div class="forget"><a href="/account/resetpass">忘记密码 ？</a></div>
+        </div>
+        <div class="lg_b">
+            <div class="regi "><span>没有帐户？</span><a class="to_regi" href="">注册</a></div>
+        </div>
+    </div>
+
+    <div class="login_con con2" style="display: none;">
+        <div class="lg_t">
+            <div>
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            </div>
+            <div><h2>注册 Instagram，分享精彩视界</h2></div>
+            <form action="" class="regi_form">
+                <div class="input_con"><input type="text" placeholder="用户名" id="regi_username" name="regi_username"></div>
+                <div class="input_con"><input type="text" placeholder="邮箱" id="regi_email" name="regi_email"></div>
+                <div class="input_con"><input type="text" placeholder="全名" id="regi_full_name" name="regi_full_name"></div>
+                <div class="input_con"><input type="text" placeholder="密码" id="regi_password" name="regi_password"></div>
+                <div class="sub">
+                    <button type="submit" id="regi_sub">注册</button>
+                </div>
+            </form>
+            <p class="aggre">注册即表示你同意我们的 条款 和 隐私权政策 。</p>
+        </div>
+        <div class="lg_b">
+            <div class="regi "><span>有帐户了 ？</span><a class="to_logi" href="">请登录</a></div>
+        </div>
+    </div>
+{% endblock body %}
