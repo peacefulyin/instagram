@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    {%load static from staticfiles%}
+    {% load filter_pool %}
+    <script type="text/javascript" src="{% static 'ins/js/jquery.js'%}"></script>
+	<script type="text/javascript" src="{% static 'ins/js/bootstrap.min.js'%}"></script>
+	<script type="text/javascript" src="{%static 'ins/js/jquery.cookie.js'%}"></script>
+	<script type="text/javascript" src="{%static 'ins/js/jquery.base64.js'%}"></script>
+
+
+	<link rel="stylesheet" type="text/css" href="{% static 'ins/css/bootstrap.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'ins/css/reset.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'ins/css/font-awesome.css'%}">
+
+</head>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $.ajaxSetup({
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}' }
+        });
+
+        $('input').attr('autocomplete','off');
+
+        $('.search_pop img').error(function () {
+            $(this).attr('src','/static/ins/images/default_avatar.png')
+        });
+
+
+        function right_fix() {
+            var nav = $('.nav');
+            var navi_top = nav.offset().top;
+            var ar_offset = $('.article:eq(1)').offset().left;
+            var ar_width = $('.article:eq(1)').width();
+
+            if(navi_top>60){
+                nav.addClass('navadd');
+                nav.find('.nm_l').addClass('nm_ladd');
+                $('.main_right').css({'position':'fixed','left':ar_offset+ar_width+44,'top':'75px'});
+            }else {
+                $('.nav').removeClass('navadd');
+                function show_navimg() {
+                    $('.nav').find('.nm_l').removeClass('nm_ladd');
+                }
+                $('.main_right').css({'position':'fixed','left':ar_offset+ar_width+44,'top':''});
+
+                setTimeout(show_navimg, 200);
+            }
+        }
+
+        if(window.location.href.indexOf('index') == 1){
+            $(window).resize(function () {
+                if(window.location.href.indexOf('index')){
+                    right_fix()
+                }
+            });
+        }
+
+        if(window.location.href.indexOf('index') == 1) {
+            $(window).scroll(function () {
+                if (window.location.href.indexOf('index')) {
+                    right_fix()
+                }
+            });
+        }
+
+
+        $('.nm_i2').click(function () {
+	    if($.cookie('islogin') == null){
+                window.location.href = '/login';
+                return false
+            }
+
+            if($('.l_main').css('display') == 'none' && $.cookie('islogin')){
+                 var sign_siblings = $('.l_main li');
+                $.each(sign_siblings,function (index, item) {
+                    if(item.className != 'lm_info_clone'){
+                        item.remove();
+                    }
+                });
+
+                $.get('/explore/recently', function (dict) {
+                    if($(dict.list.length == 0)){
+                        $('.l_main ul').append('<li class="lm_no_message"><span class="">暂无消息</span></li>');
+                    }else {
+                        $.each(dict.list, function (index, item) {
+                            console.info(item.username);
+                            var object_clone = $('.lm_info_clone').clone(true);
+                            object_clone.removeClass('lm_info_clone');
+                            object_clone.css('display','block');
+                            object_clone.find('.l_username').text(item.username);
+                            object_clone.find('.lm_info_con').attr('href','/blog/'+item.username);
+                            object_clone.find('.l_username').attr('href','/blog/'+item.username);
+                            object_clone.find('.l_username').text(item.username);
+                            object_clone.find('.liketime').text(item.pub_time.slice(5,10));
+                            object_clone.find('.l_img_con img').attr('src','/static/ins/avatar/' + item.username + '.jpg');
+                            object_clone.find('.likeimg img').attr('src','/static/ins/images_storage/' + item.shortcode + '/1.jpg');
+                            $('.l_main ul').append(object_clone);
+                        })
+                    }
+                });
+            }
+	    $('.l_main').fadeToggle();
+            return false
+        });
+
+
+        function getshortcode() {
+                function p(s) {
+                    return s < 10 ? '0' + s: s;
+                }
+
+                var myDate = new Date();
+                //获取当前年
+                var year=myDate.getFullYear();
+                //获取当前月
+                var month=myDate.getMonth()+1;
+                //获取当前日
+                var date=myDate.getDate();
+                var h=myDate.getHours();       //获取当前小时数(0-23)
+                var m=myDate.getMinutes();     //获取当前分钟数(0-59)
+                var s=myDate.getSeconds();
+                var nowtime=year+'-'+p(month)+"-"+p(date)+" "+p(h)+':'+p(m)+":"+p(s);
+
+                var username = $.cookie('islogin');
+                var shortcode = $.base64.encode(username+':'+nowtime);
+
+                return shortcode
+            }
+
+        var shortcode = getshortcode();
+
+        $('.media_conn li').hover(function () {
+            $(this).find('.dimg_icon').show()
+        },function () {
+            $(this).find('.dimg_icon').hide()
+        });
+
+
+        var mediatype = '';
+
+        $('.pub_img,.pub_video').click(function (event) {
+            if(event.target.className == 'pub_img'){
+                mediatype = 'image';
+            }else if(event.target.className == 'pub_video'){
+                mediatype = 'video';
+            }
+            return $('.upload_inp').click();
+        });
+
+        $('.pub_camera,.pub_dv').click(function (event) {
+            event.stopPropagation();
+            $(this).parent('div').click();
+        });
+
+
+        $('.upload_inp').change(function () {
+
+            var data = new FormData($('.up_form')[0]);
+            var filename = $('.upload_inp').val();
+            var filesize = $('.upload_inp').get(0).files[0].size/(1024*1024);
+
+            if(!/(gif|jpg|jpeg|png|GIF|JPG|bmp)$/.test(filename) && mediatype == 'image'){
+                alert("图片类型必须是.gif,jpeg,jpg,png,bmp中的一种");
+                $('.upload_inp').val('');
+                return false;
+            }
+
+            if (mediatype == 'image' && filesize> 1){
+                alert('文件过大')
+                return false
+            }
+
+            if(mediatype == 'video' && filesize> 100){
+                alert('文件过大');
+                return false
+            }
+
+            data.append('shortcode',shortcode);
+            data.append('mediatype',mediatype);
+            $('.file_loding_con').fadeIn();
+            $.ajax({
+                url: '/upfile',
+                type: 'POST',
+                cache: false,
+                data: data,
+                processData: false,
+                contentType: false
+            }).done(function(dict) {
+                if(mediatype == 'image'){
+                    $('.pbm_1').hide();
+                    $('.pbm_2').show();
+                    $('.add_discri').show();
+                    var imgpath = dict.imgpath;
+                    var li = $('.li_clone').clone(true);
+                    li.removeClass('li_clone');
+                    li.addClass('add_display');
+                    li.attr({'display':'inline-block','name':dict.shortcode+':'+dict.filenum});
+                    li.find('.start_video').remove();
+                    li.find('.display_img').attr('src','/'+imgpath);
+                    $('.media_conn ul').append(li);
+                    $('.media_conn').animate({
+                    scrollTop: ($('.media_conn')[0].scrollHeight+$('.media_conn').innerHeight())
+                    })
+
+                }else if(mediatype == 'video'){
+                    $('.pbm_1').hide();
+                    $('.add_discri').show();
+                    var videopath = dict.videopath;
+                    var li = $('.li_clone').clone(true);
+                    li.removeClass('li_clone');
+                    li.addClass('add_display');
+                    li.attr({'display':'inline-block','name':dict.shortcode+':'+dict.filenum});
+                    li.find('.display_img').after('<video class="pause" src="/'+videopath+'"></video>');
+                    li.find('.display_img').remove();
+                    $('.media_conn ul').append(li)
+
+                }
+                $('.upload_inp').val('');
+                $('.file_loding_con').fadeOut();
+            }).fail(function(res) {
+                $('.upload_inp').val('');
+                $('.file_loding_con').fadeOut();
+                alert('fail')
+            });
+        });
+
+        $('.dimg_icon').click(function () {
+            var this_elem = $(this);
+            var code = $(this).parents('li').attr('name');
+            $.get('/delete_temp/'+code+'/'+mediatype, function (dict) {
+                if(dict.hasOwnProperty('true')){
+                    this_elem.parents('li').remove();
+                }
+                if($('.media_conn li').length <= 1){
+                    $('.pbm_1').show();
+                    $('.pbm_2').hide();
+                    $('.add_discri').hide();
+                }
+
+            });
+        });
+
+        $('.up_form').submit(function (event) {
+            event.preventDefault();
+            var text = $('.add_discri .add_textarea').text();
+            data = {
+                'text':text,
+                'shortcode':shortcode,
+                'mediatype':mediatype
+            };
+
+
+            $.post('/commit_upload', data, function (dict) {
+                if(dict.hasOwnProperty('true')){
+                    var objects = $('.area_label');
+                    if(objects.length != 0){
+                        var filter_list = [];
+                        $.each(objects, function (index, item) {
+                            var username = objects.eq(index).text().replace('@','');
+                            if(filter_list.indexOf(username) == -1){
+                                data = {
+                                    'username':username,
+                                    'shortcode':shortcode
+                                };
+                                $.post('account/friend/addsign', data, function (dict) {
+                                    if(dict.hasOwnProperty('true')){
+                                    }
+                                });
+                                filter_list.append(username);
+                            }
+                        });
+                    }
+                }
+            }).done(function () {
+                window.location.href = '/home';
+            });
+
+        });
+
+
+        function unload() {
+            $.get('/unload/'+shortcode +'/'+ mediatype, function (dict) {
+                if (dict.hasOwnProperty('false')){
+                    window.location.reload()
+                }
+            });
+            shortcode = getshortcode();
+            $('.add_display').remove();
+            $('.pbm_1').show();
+            $('.pbm_2').hide();
+            $('.add_discri').hide();
+
+        }
+
+        $('.close_pub_but').click(function () {
+            unload();
+            $('.pub_con').fadeOut();
+            $('.sign_friend_con').hide();
+            shortcode = getshortcode();
+        });
+
+
+        $(window).unload(function(){
+            if($('.pub_con').css('display') != 'none'){
+                unload();
+            }
+
+        });
+
+        $('.pub_icon').click(function () {
+            if($.cookie('islogin')){
+                $('.pub_con').fadeIn();
+            }else {
+                window.location.href = '/login'
+            }
+
+        });
+
+        var filter_es_list = [];
+        $('.explore_search').keyup(function () {
+            filter_es_list = [];
+            var friend_siblings = $('.search_pop li');
+            $.each(friend_siblings,function (index, item) {
+                if(item.className != 'spop_clone'){
+                    item.remove();
+                }
+            });
+
+            var keyword = $('.explore_search').val();
+            if(keyword == ''){
+                $('.search_pop').hide();
+                $('.exit_search').hide();
+                return false
+            }
+            $.get('/explore/search/'+keyword, function (dict) {
+                if(dict.hasOwnProperty('true')){
+                    $.each(dict.page, function (index, item) {
+                        if(filter_es_list.indexOf(item.username) == -1){
+                            var search_li = $('.spop_clone').clone(true);
+                            search_li.css('display','flex');
+                            search_li.removeClass('spop_clone');
+                            search_li.attr('id',item.id);
+                            search_li.find('.spop_username').text(item.username);
+                            search_li.find('.spop_avatar_con img').attr('src','/static/ins/avatar/'+item.username+'.jpg');
+                            search_li.find('.spop_about_selt').text(item.about_self);
+                            $('.search_pop ul').append(search_li);
+
+                            filter_es_list.push(item.username);
+                        }
+                    });
+                }else {
+                    $('.search_pop').hide();
+                }
+            });
+            $('.search_pop').show()
+        });
+
+        $('.explore_search').focusin(function () {
+            $('.exit_search').show();
+        });
+
+        $('.exit_search').click(function () {
+            $('.explore_search').val('');
+            $('.search_pop').hide();
+            $(this).hide();
+        });
+
+
+        $('.search_pop li').click(function () {
+            var username = $(this).find('.spop_username').text();
+            window.location.href = '/blog/'+username
+        });
+
+
+
+        $('.add_textarea,.add_discri .friend_search').keydown(function (event) {
+
+            if(event.target.className == 'add_textarea'){
+                var text = $(this).text();
+
+                if(event.keyCode == 50 && event.shiftKey){
+                    $('.signfriend').show();
+                    $('.signfriend input').focus();
+                    return false;
+                }
+
+            }else {
+                var friend_siblings = $('.add_discri .signfriend li');
+                $.each(friend_siblings,function (index, item) {
+                    if(item.className != 'signfriend_li_clone'){
+                        item.remove();
+                    }
+                });
+
+                var keyword = $('.friend_search').val();
+                $.get('/account/friend/signfriend/'+keyword, function (dict) {
+                    if(dict.hasOwnProperty('true')){
+                        var timetime = 0
+                        $.each(dict.list, function (index, item) {
+                            console.info(timetime)
+                            timetime += 1
+                            var sign_li = $('.add_discri .signfriend_li_clone').clone(true);
+                            sign_li.removeClass('signfriend_li_clone');
+                            sign_li.attr('id',item.id);
+                            sign_li.css('display','block');
+                            sign_li.find('.sign_username').text(item.username);
+
+                            $('.add_discri .signfriend ul').prepend(sign_li)
+
+                        });
+                        var sign_li = $('.add_discri .signfriend_li_clone').clone(true);
+                        sign_li.removeClass('signfriend_li_clone');
+                        sign_li.css('display','block');
+                        sign_li.find('.sign_username').remove();
+                        sign_li.addClass('just_this');
+                        sign_li.css({'text-align':'center'});
+                        sign_li.find('.sign_li').addClass('just_this_val');
+                        sign_li.find('.sign_li').removeClass('sign_username');
+                        $('.add_discri .signfriend ul').prepend(sign_li)
+                    }
+                })
+            }
+        });
+
+
+
+
+        $('.add_discri .signfriend li').click(function (event) {
+            event.stopPropagation();
+            var textarea = $('.add_textarea');
+            if(event.target.className == 'just_this'){
+                textarea.append('@');
+            }else {
+                var label = $('<a class="area_label" contenteditable="false"></a>');
+                var target_username = $(this).find('.sign_username').text();
+                var target_id = $(this).attr('id');
+                label.attr('id',target_id).text('@'+target_username);
+                textarea.append(label);
+                textarea.append(' ');
+            }
+            $('.signfriend').hide();
+            textarea.focus();
+
+        });
+
+        $('.start_video').click(function () {
+            event.stopPropagation();
+            var video = $(this).parents('.video_con').find('video');
+              if (video.hasClass('pause') ) {
+                  video.trigger("play");
+                $('.start_video').fadeOut();
+                video.removeClass('pause');
+                video.addClass('play');
+
+              } else {
+                $('.start_video').fadeIn();
+                video.trigger("pause");
+                video.removeClass('play');
+                video.addClass('pause');
+              }
+        });
+
+
+
+    })
+</script>
+
+{% block js %}
+{% endblock %}
+
+
+<style>
+    body{
+        position: relative;
+    }
+
+    body, button, input, textarea ,a,span, .add_textarea{
+	    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+	    font-size: 14px;
+        color: #262626;
+	  	font-weight: 500;
+	}
+
+
+
+    ul{
+        list-style: none;
+    }
+
+    a{
+        cursor: pointer;
+    }
+
+    a:hover{
+        text-decoration: none;
+    }
+
+    input:focus, .add_textarea:focus {
+        outline: none;
+    }
+
+
+	div, footer, header, section{
+		position: relative;
+	}
+
+	* {
+	    -webkit-box-sizing: border-box;
+	    -moz-box-sizing: border-box;
+	    box-sizing: border-box;
+	}
+
+	.avatar{
+		border-radius: 50%;
+	    background-color: #fafafa;
+	    -webkit-box-sizing: border-box;
+	    box-sizing: border-box;
+	    cursor: pointer;
+	    display: block;
+	    -webkit-box-flex: 0;
+	    -webkit-flex: 0 0 auto;
+	    -ms-flex: 0 0 auto;
+	    flex: 0 0 auto;
+	    overflow: hidden;
+	    position: relative;
+	}
+
+	.nav{
+	    background-color: #fff;
+	    border-bottom: 1px solid rgba(0,0,0,.0975);
+	    position: fixed;
+	    top: 0;
+	    width: 100%;
+	    z-index: 1;
+	    -webkit-transition: height .2s ease-in-out;
+	    transition: height .2s ease-in-out;
+	    height: 77px;
+
+	}
+
+	.nav_m{
+	    max-width: 50%;
+   		padding: 26px 40px;
+   		transition: height .2s ease-in-out;
+    	width: 100%;
+    	height: 77px;
+        margin-left: 26%;
+	}
+
+	.nm_l{
+		background-image: url(/static/ins/images/icons.png);
+   		background-repeat: no-repeat;
+        background-position: -177px 0;
+	    height: 36px;
+	    width: 176px;
+    	margin-top: -4px;
+        position: absolute;
+        left:4%;
+	}
+
+
+
+	.nm_m{
+		flex: 0 1 auto;
+	    min-width: 125px;
+	    width: 215px;
+	    height: 28px;
+	    float: left;
+        position: absolute;
+        left:35%;
+	}
+
+	.nm_m input{
+	    border: solid 1px #dbdbdb;
+	    border-radius: 3px;
+	    color: #262626;
+	    font-size: 14px;
+	    outline: none;
+	    padding: 3px 10px 3px 26px;
+	    z-index: 2;
+	    position: relative;
+        background-color: rgb(250,250,250);
+	}
+
+    .nm_m input::-webkit-input-placeholder{text-align: center;}
+    .nm_m input::-webkit-input-placeholder{text-indent: -12px;}
+
+	.nm_r{
+		height: 40px;
+		width: 200px;
+		float: right;
+	}
+
+    .nm_r div{
+        float: left;
+    }
+
+	.nm_icons{
+	    background-image: url(/static/ins/images/icons.png);
+	    background-repeat: no-repeat;
+	    margin-left: 30px;
+
+	}
+
+    .nm_r a{
+        display: inline-block;
+        height: 24px;
+	    width: 24px;
+    }
+
+	.nm_i1{
+		background-position: -310px -352px;
+	}
+
+	.nm_i2{
+	    background-position: -408px 0;
+	}
+
+	.nm_i3{
+	    background-position: -362px -352px;
+	}
+
+    .pub_icon{
+        position: relative;
+        left:200px;
+        bottom:5px;
+        cursor: pointer;
+    }
+
+
+    .navadd{
+        height:51px;
+        display: flex;
+        align-items: center;
+        transition: height .2s ease-in-out;
+    }
+
+    .nm_ladd{
+        background-image: url(/static/ins/images/icons.png);
+   		background-repeat: no-repeat;
+        margin-right: 185px;
+    	margin-top: -4px;
+    	float: left;
+        background-position: -162px -352px;
+        height: 30px;
+        width: 30px;
+        transition: height .5s ease-in-out;
+    }
+
+    /* like com*/
+    .l_main{
+        background-color: white;
+        width: 498px;
+        margin: 135px auto 0;
+        border: 1px solid #efefef;
+        border-radius: 3px;
+        position: absolute;
+        right: 510px;
+        top: -75px;
+    }
+
+    .l_main ul{
+        max-height:360px;
+        overflow-y: auto;
+    }
+
+    .l_main li{
+        border-bottom: solid 1px #efefef;
+        display: flex;
+        align-items: center;
+        padding: 8px 16px;
+    }
+
+    .l_main .l_username{
+        font-weight: 600;
+    }
+
+    .lm_info_con{
+        display: flex;
+        width: 100%;
+    }
+
+    .l_img_con{
+        float: left;
+    }
+
+    .l_img_con img{
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+    }
+
+
+    .likeimg img{
+        width: 40px;
+        height: 40px;
+    }
+
+    .l_user_info{
+        display: inline-block;
+        position: relative;
+        margin: 0 50px 0 20px;
+        top:8px;
+    }
+
+    .lm_no_message{
+        font-weight: 600;
+        font-size: 22px;
+
+    }
+
+    .name span{
+        color: #999;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .ver_icon{
+        display: inline-block;
+        margin-left: 8px;
+        background-image: url(/static/ins/images/icons.png);
+        background-position: -434px -226px;
+        position: relative;
+        top:5px;
+        height: 18px;
+        width: 18px;
+    }
+
+    .likeyou{
+        display: inline-block;
+        width: 170px;
+        padding: 0 10px;
+        color: #222222;
+    }
+
+    .liketime{
+        color: #999;
+    }
+
+    .like{
+        float: right;
+        background: #3897f0;
+        border-color: #3897f0;
+        color: #fff;
+        -webkit-appearance: none;
+        border-radius: 3px;
+        border-style: solid;
+        border-width: 1px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 26px;
+        outline: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        position: relative;
+        top:15px;
+    }
+
+    .pub_con{
+        z-index:998;
+        position: fixed;
+        left: 0;
+        bottom:0;
+        top:0;
+        right:0;
+        background-color: rgba(0,0,0,.3);
+    }
+
+    .pub_main{
+        width: 540px;
+        min-height: 99px;
+        position: fixed;
+
+        color: #444;
+        background-color: #ffffff;
+        border-radius: 3px;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%,-50%)
+    }
+
+    .pub_header{
+        width: 100%;
+        height:45px;
+        padding: 10px 15px 10px 20px;
+        background-color: #ffffff;
+    }
+
+    .pub_media{
+        border-top: 2px dashed #cfcfcf;
+        border-bottom: 2px dashed #cfcfcf;
+        background-color: #f2f2f2;
+        color: #989898;
+        width: 100%;
+    }
+
+    .pub_img,.pub_video{
+        display: inline-block;
+        width: 49%;
+        height:100%;
+        cursor: pointer;
+    }
+
+    .pbm_1{
+        height:196px;
+    }
+
+    .pbm_2{
+        height:36px;
+        padding: 6px 0;
+        text-align: center;
+    }
+
+    .pbm_2 .pub_img{
+        width: 100%;
+    }
+
+    .pbm_2 span{
+        font-size: 14px;
+        line-height: 18px;
+        color: rgb(152,152,152);
+    }
+
+
+
+    .slide_line{
+        content: "";
+        display: inline-block;
+        position: absolute;
+        top: 18px;
+        right: 50%;
+        bottom: 18px;
+        height:160px;
+        width: 1px;
+        background-color: #cfcfcf;
+    }
+
+    .pub_foot{
+        height:60px;
+        padding: 15px 20px;
+    }
+
+    .close_pub_but{
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 5px 7px;
+        border-radius: 2px;
+        border: 1px solid #9da6af;
+        background-color: #9da6af;
+        color: #fff;
+    }
+
+    .pub_but{
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 5px 7px;
+        border-radius: 2px;
+        border: 1px solid #529ecc;
+        background-color: #529ecc;
+        color: #fff;
+        float: right;
+    }
+
+    .media_conn{
+        max-height:540px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .media_conn li{
+        background-color: rgb(241,241,253);
+        text-align: center;
+        margin-bottom: 4px;
+        position: relative;
+    }
+
+
+    .media_conn li .display_img{
+        height: auto;
+        max-width: 540px;
+        margin:auto;
+    }
+
+    .media_conn li video{
+        height: auto;
+        max-width: 540px;
+        margin:auto;
+    }
+
+    .media_conn li:nth-child(1){
+        display: none;
+    }
+
+    .dimg_icon{
+        position: absolute;
+        top: -16px;
+        right: 0;
+        cursor: pointer;
+    }
+
+    .start_video{
+        background: url(/static/ins/images/start_video.png);
+        position: absolute;
+        height: 135px;
+        width: 135px;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        top: 50%;
+    }
+
+    .add_discri{
+        padding: 25px 20px 0;
+        border-bottom: 1px solid rgb(242,242,242);
+        position: relative;
+    }
+
+    .signfriend{
+        position: absolute;
+        right:-158px;
+        top:0;
+        width: 158px;
+        max-height:180px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .signfriend ul{
+        list-style: none;
+        max-height:180px;
+    }
+
+
+    .signfriend li{
+        padding: 0 10px;
+        width: 100%;
+        height: 30px;
+        background-color: white;
+        border-bottom: 1px solid #efefef;
+        border-left: 1px solid black;
+        cursor: pointer;
+    }
+
+    .signfriend li:hover{
+        background-color: #c7c7c7;
+    }
+
+    .signfriend .friend_search{
+        border: none;
+        width: 100%;
+        height: 30px;
+        border-bottom: 1px solid #efefef;
+        border-left: 1px solid black;
+        background-color: white;
+    }
+
+    .sign_username{
+        line-height: 30px;
+    }
+
+    .add_textarea{
+        background-color: white;
+        width: 100%;
+        height:180px;
+    }
+
+    .add_textarea a{
+        color: #003569;
+    }
+
+    .add_textarea:empty:before{
+        content: attr(placeholder);
+        color:#bbb;
+    }
+    .add_textarea:focus:before{
+        content:none;
+    }
+
+
+
+
+    .pub_camera,.pub_dv{
+        position: absolute;
+        left:50%;
+        top:40%;
+        transform: translate(-50%,-50%);
+    }
+
+    .pub_camera span,.pub_dv span{
+        position: relative;
+        top:15px;
+        color: rgb(152,152,152);
+    }
+
+    .exit_search{
+        position: absolute;
+        right:6px;
+        top:6px;
+        background: url(/static/ins/images/close_search.png) no-repeat;
+        width: 20px;
+        height: 20px;
+        z-index: 20;
+
+    }
+
+
+
+
+</style>
+<style>
+        .pub_con .file_loding_con{
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height:100%;
+            background-color: white;
+            text-align: center;
+            display: none;
+        }
+
+        .pub_con .file_loading{
+            display: inline-block;
+            width:128px ;
+            height:128px;
+            background: url(/static/ins/images/loding_128.png) no-repeat;
+            animation: file_loding_rotate 1s infinite;
+            margin-top: 64px;
+            transform-origin:64px 64px;
+        }
+
+
+
+        @keyframes file_loding_rotate{
+          0%{
+           transform: rotate(0deg);
+          }
+          100%{
+            transform: rotate(360deg);
+          }
+        }
+    </style>
+{% block style %}
+{% endblock %}
+<body>
+
+    <div class="pub_con" style="display: none;">
+        <form class="up_form" enctype="multipart/form-data" action="" method="post">
+            {% csrf_token %}
+           <input class="upload_inp" type="file" name="upfile" value='ha' style="display: none">
+
+        <div class="pub_main">
+            <div class="pub_header"></div>
+            <div class="media_conn video_con">
+                <ul>
+                    <li class="li_clone"><img class="display_img" src="" alt=""><span class="start_video"></span><span class="dimg_icon" style="display: none"><img src="/static/ins/images/delete_image.png" alt=""></span></li>
+                </ul>
+            </div>
+            <div class="pub_media pbm_1" >
+                <div class="pub_img">
+                    <div class="pub_camera">
+                        <img class="" src="/static/ins/images/camera.png" alt="">
+                        <div><span>上传图片</span></div>
+                    </div>
+                </div>
+                <div class="slide_line"></div>
+                <div class="pub_video">
+                    <div class="pub_dv">
+                        <img class="" src="/static/ins/images/dv.png" alt="">
+                        <div><span>上传视频</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pub_media pbm_2" style="display: none;">
+                <div class="pub_img">
+                    <span>添加另一张</span>
+                </div>
+            </div>
+            <div class="add_discri" style="display: none">
+                <div class="add_textarea" placeholder="输入@即可标记好友" contenteditable="true"></div>
+                <textarea name="" id="" cols="30" rows="6" style="display: none; width: 500px; resize: none;border: none " placeholder="可以在此添加一些描述"></textarea>
+                <div class="signfriend" style="display: none;">
+                    <div><input  class="friend_search" placeholder="搜索你的好友吧" type="text"></div>
+                    <ul>
+                        <li class="signfriend_li_clone" style="display: none;"><span>@</span><span class="sign_username">nihao</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pub_dsc"></div>
+            <div class="pub_foot">
+                <button class="close_pub_but" onclick="return false">关闭</button>
+                <button type="submit" class="pub_but" >发帖</button>
+            </div>
+            <div class="file_loding_con"><span class="file_loading"></span></div>
+        </div>
+        </form>
+    </div>
+
+
+    <div class="nav" style="display: ">
+		<div class="nav_m">
+            <a href="/index"><div class="nm_l"></div></a>
+			<div class="nm_m">
+				<input class="explore_search" type="" placeholder="搜索" name="">
+                <span class="exit_search" style="display: none;"></span>
+                <div class="search_pop" style="display: none;">
+                    <div class="spop_trianger">
+                    </div>
+                    <ul>
+                        <li class="spop_clone" style="display: none" >
+                            <div class="spop_avatar_con">
+                                <img src="/static/ins/avatar/satisfyingvideo.jpg" alt="">
+                            </div>
+                            <div class="spop_info_con">
+                                <span class="spop_username">nihao</span>
+                                <span class="spop_about_selt">my name is nihao</span>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+			</div>
+			<div class="nm_r">
+				<div><a class="nm_icons nm_i1" href="/explore"></a></div>
+				<div>
+                    <a class="nm_icons nm_i2" href=""></a>
+                </div>
+				<div><a class="nm_icons nm_i3" href="/home"></a></div>
+                <div><img class="pub_icon" src="/static/ins/images/letpub.png" alt=""></div>
+			</div>
+
+		</div>
+
+         <div class="l_main" style="display: none;">
+            <div class="l_triangle">
+            </div>
+            <ul>
+                <li class="lm_info_clone" style="display: none">
+                    <div class="lm_info_con" >
+                        <a href="" class="l_img_con"><img src="" alt=""></a>
+                        <div class="l_user_info">
+                            <div><a class="l_username" href=""></a><span class="likeyou">在文章中提到了你</span><span class="liketime">1天</span></div>
+                        </div>
+                        <a class="likeimg" href=""><img src="" alt=""></a>
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+	</div>
+
+
+
+
+{% block body %}
+{% endblock %}
+</body>
+<style>
+
+    .search_pop{
+        width: 240px;
+        max-height:360px;
+        position: relative;
+        top: 20px;
+        border: solid 1px #e6e6e6;
+        border-radius: 3px;
+        -webkit-box-shadow: 0 0 5px rgba(0,0,0,.0975);
+        overflow-y: auto;
+        overflow-x: hidden;
+        background-color: white;
+
+    }
+
+    .search_pop li{
+        width: 225px;
+        height:70px;
+        padding:8px 14px;
+        border-bottom: solid 1px #efefef;
+        display:flex;
+        align-items:center;
+        cursor: pointer;
+    }
+
+    .search_pop li:hover{
+        background-color: rgb(250,250,250);
+    }
+
+    .spop_avatar_con img{
+        width: 30px;
+        height:30px;
+        margin-right: 10px;
+        border-radius: 50%;
+    }
+
+    .spop_username{
+        display: block;
+        font-weight:bold;
+    }
+
+    .spop_about_selt{
+        font-weight: 300;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #999;
+    }
+
+
+</style>
+</html>

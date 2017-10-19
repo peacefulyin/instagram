@@ -4,6 +4,7 @@ from django import template
 from ins.models import *
 
 register = template.Library()
+static_path = '/var/www/ins/'
 
 
 @register.filter
@@ -47,7 +48,7 @@ def self_veri(target_full_name, username):
 
 @register.filter
 def vari_veri(shortcode):
-    path = 'static/ins/images_storage/' + shortcode
+    path = static_path + 'static/ins/images_storage/' + shortcode
     img_total = len(os.listdir(path))
     if img_total > 1:
         return 'true'

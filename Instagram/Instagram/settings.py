@@ -25,7 +25,7 @@ SECRET_KEY = 'c5p^c7kmduo=+10pxh3c9z@+v(snl&q*2ptv@(kr8dch!tc3@b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ins',
+    'djcelery',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'ins.middleware.SessionErrorMiddleware',
     'ins.middleware.BlockedIpMiddleware',
 ]
 
@@ -119,17 +121,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-EMAIL_USE_TLS = False
-EMAIL_HOST = 'smtp.qq.com'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = '731769168@qq.com'
-EMAIL_HOST_PASSWORD = 'JohnSnow@321'
-DEFAULT_FROM_EMAIL = 'ins <731769168@qq.com>'
-EMAIL_USE_SSL  = True
-
-
 BLOCKED_IPS = []
 
 MONGO_URL = 'localhost'
@@ -139,7 +130,14 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_IMPORTS = ('ins.task')
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_ROOT = '/var/www/ins/static'

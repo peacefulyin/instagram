@@ -177,9 +177,13 @@
 <script>
  $(document).ready(function () {
 
+     $.ajaxSetup({
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}' }
+        });
+
      var wait1s = '';
      $('.email_input').keyup(function () {
-         clearTimeout(wait2s);
+         clearTimeout(wait1s);
          wait1s=setTimeout(function(){
              var email = $('.email_input').val();
              $.get('/account/resetpass/veri_email/'+email, function (dict) {
@@ -195,7 +199,7 @@
 
      var timer = 60;
      function reverse_counter() {
-        if(timer >50){
+        if(timer >0){
             $('.counter').text(timer);
             timer -= 1
         }else {

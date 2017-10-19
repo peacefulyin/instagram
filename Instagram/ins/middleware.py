@@ -14,6 +14,16 @@ db = client[mong_db]
 
 redisconn = redis.Redis(host='localhost', port=6379, db=3)
 
+class SessionErrorMiddleware(deprecation.MiddlewareMixin):
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        try:
+            if request.session['islogin']:
+                return view_func(request, *view_args, **view_kwargs)
+        except:
+            request.session['islogin'] = False
+            return view_func(request, *view_args, **view_kwargs)
+
+
 class BlockedIpMiddleware(deprecation.MiddlewareMixin):
     def process_request(self, request):
         ua = request.META.get('HTTP_USER_AGENT', 'unknown')
@@ -21,7 +31,7 @@ class BlockedIpMiddleware(deprecation.MiddlewareMixin):
             return HttpResponseForbidden()
 
         if request.META.has_key('HTTP_X_FORWARDED_FOR'):
-            ip = request.request.META.get('HTTP_X_FORWARDED_FOR')
+            ip = request.META.get('HTTP_X_FORWARDED_FOR')
         else:
             ip = request.META.get('REMOTE_ADDR')
         if ip in redisconn.smembers('block_ip'):

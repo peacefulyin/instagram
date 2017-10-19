@@ -24,11 +24,20 @@
         $.ajaxSetup({
             data: {csrfmiddlewaretoken: '{{ csrf_token }}' }
         });
+	
+	$('video').on('ended',function () {
+             $(this).parents('.video_con').find('.start_video').show();
+        });
+	
+	$('.close_but').click(function(){
+		$('video').trigger('pause');
+             $('video').parents('.video_con').find('.start_video').show();
+	});
 
         $('input').attr('autocomplete','off');
 
         $('.search_pop img').error(function () {
-            $(this).attr('src','/static/ins/images/default_avatar.png')
+            $(this).attr('src','/static/ins/images/default_avatar.png');
         });
 
 
@@ -71,6 +80,10 @@
 
 
         $('.nm_i2').click(function () {
+            if($.cookie('islogin') == null){
+                window.location.href = '/login';
+                return false
+            }
             if($('.l_main').css('display') == 'none'){
                  var sign_siblings = $('.l_main li');
                 $.each(sign_siblings,function (index, item) {
@@ -80,25 +93,30 @@
                 });
 
                 $.get('/explore/recently', function (dict) {
-                    $.each(dict.list, function (index, item) {
-                        console.info(item.username);
-                        var object_clone = $('.lm_info_clone').clone(true);
-                        object_clone.removeClass('lm_info_clone');
-                        object_clone.css('display','block');
-                        object_clone.find('.l_username').text(item.username);
-                        object_clone.find('.lm_info_con').attr('href','/blog/'+item.username);
-                        object_clone.find('.l_username').attr('href','/blog/'+item.username);
-                        object_clone.find('.l_username').text(item.username);
-                        object_clone.find('.liketime').text(item.pub_time.slice(5,10));
-                        object_clone.find('.l_img_con img').attr('src','/static/ins/avatar/' + item.username + '.jpg');
-                        object_clone.find('.likeimg img').attr('src','/static/ins/images_storage/' + item.shortcode + '/1.jpg');
-                        $('.l_main ul').append(object_clone);
+                    if($(dict.list.length == 0)){
+                        $('.l_main ul').append('<li class="lm_no_message"><span class="">暂无消息</span></li>');
+                    }else {
+                        $.each(dict.list, function (index, item) {
+                            console.info(item.username);
+                            var object_clone = $('.lm_info_clone').clone(true);
+                            object_clone.removeClass('lm_info_clone');
+                            object_clone.css('display','block');
+                            object_clone.find('.l_username').text(item.username);
+                            object_clone.find('.lm_info_con').attr('href','/blog/'+item.username);
+                            object_clone.find('.l_username').attr('href','/blog/'+item.username);
+                            object_clone.find('.l_username').text(item.username);
+                            object_clone.find('.liketime').text(item.pub_time.slice(5,10));
+                            object_clone.find('.l_img_con img').attr('src','/static/ins/avatar/' + item.username + '.jpg');
+                            object_clone.find('.likeimg img').attr('src','/static/ins/images_storage/' + item.shortcode + '/1.jpg');
+                            $('.l_main ul').append(object_clone);
+                        })
+                    }
 
-                    })
                 });
             }
-
             $('.l_main').fadeToggle();
+
+
             return false
         });
 
@@ -194,6 +212,7 @@
                     li.removeClass('li_clone');
                     li.addClass('add_display');
                     li.attr({'display':'inline-block','name':dict.shortcode+':'+dict.filenum});
+                    li.find('.start_video').remove();
                     li.find('.display_img').attr('src','/'+imgpath);
                     $('.media_conn ul').append(li);
                     $('.media_conn').animate({
@@ -537,12 +556,10 @@
 	}
 
 	.nav_m{
-	    max-width: 50%;
    		padding: 26px 40px;
    		transition: height .2s ease-in-out;
     	width: 100%;
     	height: 77px;
-        margin-left: 26%;
 	}
 
 	.nm_l{
@@ -551,9 +568,9 @@
         background-position: -177px 0;
 	    height: 36px;
 	    width: 176px;
-        margin-right: 185px;
     	margin-top: -4px;
-    	float: left;
+        position: absolute;
+        left:25%;
 	}
 
 
@@ -565,7 +582,7 @@
 	    height: 28px;
 	    float: left;
         position: absolute;
-        left:35%;
+        left:45%;
 	}
 
 	.nm_m input{
@@ -586,8 +603,21 @@
 	.nm_r{
 		height: 40px;
 		width: 200px;
-		float: right;
+        position: absolute;
+        right:20%;
 	}
+
+
+@media screen and (max-width:768px)  {
+    .nm_r{
+		height: 40px;
+		width: 200px;
+        position: absolute;
+	right 0;
+	}
+
+}
+
 
     .nm_r div{
         float: left;
@@ -621,7 +651,7 @@
     .pub_icon{
         position: relative;
         left:200px;
-        bottom:5px;
+        bottom:30px;
         cursor: pointer;
     }
 
@@ -689,7 +719,6 @@
     }
 
 
-
     .likeimg img{
         width: 40px;
         height: 40px;
@@ -700,6 +729,12 @@
         position: relative;
         margin: 0 50px 0 20px;
         top:8px;
+    }
+
+    .lm_no_message{
+        font-weight: 600;
+        font-size: 22px;
+
     }
 
     .name span{
@@ -1095,37 +1130,39 @@
     </div>
 
 
-    <div class="nav" style="display: ">
+    <div class="nav container-fluid">
 		<div class="nav_m">
-            <a href="/index"><div class="nm_l"></div></a>
-			<div class="nm_m">
-				<input class="explore_search" type="" placeholder="搜索" name="">
-                <span class="exit_search" style="display: none;"></span>
-                <div class="search_pop" style="display: none;">
-                    <div class="spop_trianger">
-                    </div>
-                    <ul>
-                        <li class="spop_clone" style="display: none" >
-                            <div class="spop_avatar_con">
-                                <img src="/static/ins/avatar/satisfyingvideo.jpg" alt="">
-                            </div>
-                            <div class="spop_info_con">
-                                <span class="spop_username">nihao</span>
-                                <span class="spop_about_selt">my name is nihao</span>
-                            </div>
-                        </li>
+            <a href="/index"><div class="nm_l visible-lg visible-md"></div></a>
+            <div class="row">
+                <div class="nm_m col-md-5 visible-lg">
+                    <input class="explore_search" type="" placeholder="搜索" name="">
+                    <span class="exit_search" style="display: none;"></span>
+                    <div class="search_pop" style="display: none;">
+                        <div class="spop_trianger">
+                        </div>
+                        <ul>
+                            <li class="spop_clone" style="display: none" >
+                                <div class="spop_avatar_con">
+                                    <img src="/static/ins/avatar/satisfyingvideo.jpg" alt="">
+                                </div>
+                                <div class="spop_info_con">
+                                    <span class="spop_username">nihao</span>
+                                    <span class="spop_about_selt">my name is nihao</span>
+                                </div>
+                            </li>
 
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
-			</div>
-			<div class="nm_r">
-				<div><a class="nm_icons nm_i1" href="/explore"></a></div>
-				<div>
-                    <a class="nm_icons nm_i2" href=""></a>
+                <div class="nm_r col-md-7 col-sm-8">
+                    <div><a class="nm_icons nm_i1" href="/explore"></a></div>
+                    <div>
+                        <a class="nm_icons nm_i2" href=""></a>
+                    </div>
+                    <div><a class="nm_icons nm_i3" href="/home"></a></div>
+                    <div><img class="pub_icon" src="/static/ins/images/letpub.png" alt=""></div>
                 </div>
-				<div><a class="nm_icons nm_i3" href="/home"></a></div>
-                <div><img class="pub_icon" src="/static/ins/images/letpub.png" alt=""></div>
-			</div>
+            </div>
 
 		</div>
 
@@ -1142,6 +1179,7 @@
                         <a class="likeimg" href=""><img src="" alt=""></a>
                     </div>
                 </li>
+
 
             </ul>
         </div>

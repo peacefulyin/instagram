@@ -1,0 +1,594 @@
+2017/10/19 01:04:26 [error] 1635#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 220.112.15.254, server: www.xpiano.com, request: "GET / HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114"
+2017/10/19 01:04:26 [error] 1635#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 220.112.15.254, server: www.xpiano.com, request: "GET /favicon.ico HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114", referrer: "http://39.108.232.114/"
+2017/10/19 01:04:51 [warn] 1635#0: *1 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/1/00/0000000001 while reading upstream, client: 220.112.15.254, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114"
+2017/10/19 01:04:51 [error] 1635#0: *1 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "39.108.232.114", referrer: "http://39.108.232.114/index/"
+2017/10/19 01:04:51 [error] 1635#0: *11 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "39.108.232.114", referrer: "http://39.108.232.114/index/"
+2017/10/19 01:04:51 [info] 1635#0: *1 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/YmFsbGV0OjIwMTctMTAtMTcgMjE6MjY6MTA=/1.mp4 HTTP/1.1", host: "39.108.232.114", referrer: "http://39.108.232.114/index/"
+2017/10/19 01:05:11 [info] 1635#0: *11 client prematurely closed connection (32: Broken pipe) while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/MTBpZGswMToyMDE3LTEwLTExIDA3OjM0OjU0/1.mp4 HTTP/1.1", host: "39.108.232.114", referrer: "http://39.108.232.114/index/"
+2017/10/19 01:06:51 [warn] 1635#0: *13 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/2/00/0000000002 while reading upstream, client: 220.112.15.254, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 01:06:51 [error] 1635#0: *16 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:06:51 [error] 1635#0: *18 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:06:52 [info] 1635#0: *17 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/MTBpZGswMToyMDE3LTEwLTExIDA3OjM0OjU0/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:07:18 [warn] 1635#0: *18 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/3/00/0000000003 while reading upstream, client: 220.112.15.254, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 01:07:20 [error] 1635#0: *18 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:07:22 [error] 1635#0: *16 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:07:58 [warn] 1635#0: *13 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/4/00/0000000004 while reading upstream, client: 220.112.15.254, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 01:08:00 [error] 1635#0: *23 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:01 [error] 1635#0: *18 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:03 [error] 1635#0: *21 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:24 [info] 1635#0: *22 client 220.112.15.254 closed keepalive connection
+2017/10/19 01:08:26 [error] 1635#0: *16 open() "/var/www/ins/static/ins/avatar/juliaskajwo.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/juliaskajwo.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *18 open() "/var/www/ins/static/ins/avatar/lindsay_hardee.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/lindsay_hardee.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *23 open() "/var/www/ins/static/ins/avatar/jessicaxxabrahams.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/jessicaxxabrahams.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *13 open() "/var/www/ins/static/ins/avatar/jasibenjamin.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/jasibenjamin.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *21 open() "/var/www/ins/static/ins/avatar/karinettesanchez.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/karinettesanchez.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *16 open() "/var/www/ins/static/ins/avatar/loustar718.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/loustar718.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *18 open() "/var/www/ins/static/ins/avatar/safidiop.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/safidiop.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *26 open() "/var/www/ins/static/ins/avatar/dbarse7.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/dbarse7.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *23 open() "/var/www/ins/static/ins/avatar/stephosaurusrex_.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/stephosaurusrex_.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *13 open() "/var/www/ins/static/ins/avatar/lllllllukawska.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/lllllllukawska.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *21 open() "/var/www/ins/static/ins/avatar/mikemassi18.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/mikemassi18.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *18 open() "/var/www/ins/static/ins/avatar/shanechouking.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/shanechouking.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *23 open() "/var/www/ins/static/ins/avatar/shelbycalin.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/shelbycalin.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *13 open() "/var/www/ins/static/ins/avatar/daisyboos.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/daisyboos.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *13 open() "/var/www/ins/static/ins/avatar/sgoehr.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/sgoehr.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *18 open() "/var/www/ins/static/ins/avatar/anapatricia_marreiros.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/anapatricia_marreiros.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *26 open() "/var/www/ins/static/ins/avatar/sabrenawhite74.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/sabrenawhite74.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *23 open() "/var/www/ins/static/ins/avatar/souza.thiagosilva.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/souza.thiagosilva.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *18 open() "/var/www/ins/static/ins/avatar/lindsay_hardee.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/lindsay_hardee.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *21 open() "/var/www/ins/static/ins/avatar/juliaskajwo.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/juliaskajwo.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *26 open() "/var/www/ins/static/ins/avatar/jessicaxxabrahams.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/jessicaxxabrahams.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *23 open() "/var/www/ins/static/ins/avatar/jasibenjamin.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/jasibenjamin.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *13 open() "/var/www/ins/static/ins/avatar/karinettesanchez.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/karinettesanchez.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *16 open() "/var/www/ins/static/ins/avatar/safidiop.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/safidiop.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *18 open() "/var/www/ins/static/ins/avatar/stephosaurusrex_.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/stephosaurusrex_.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *26 open() "/var/www/ins/static/ins/avatar/loustar718.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/loustar718.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *21 open() "/var/www/ins/static/ins/avatar/dbarse7.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/dbarse7.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *16 open() "/var/www/ins/static/ins/avatar/lllllllukawska.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/lllllllukawska.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *13 open() "/var/www/ins/static/ins/avatar/mikemassi18.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/mikemassi18.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *23 open() "/var/www/ins/static/ins/avatar/shanechouking.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/shanechouking.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *18 open() "/var/www/ins/static/ins/avatar/shelbycalin.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/shelbycalin.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *26 open() "/var/www/ins/static/ins/avatar/daisyboos.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/daisyboos.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *21 open() "/var/www/ins/static/ins/avatar/sgoehr.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/sgoehr.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *13 open() "/var/www/ins/static/ins/avatar/sabrenawhite74.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/sabrenawhite74.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *16 open() "/var/www/ins/static/ins/avatar/anapatricia_marreiros.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/anapatricia_marreiros.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:08:26 [error] 1635#0: *23 open() "/var/www/ins/static/ins/avatar/souza.thiagosilva.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/souza.thiagosilva.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:09:54 [warn] 1635#0: *28 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/5/00/0000000005 while reading upstream, client: 220.112.15.254, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 01:10:02 [error] 1635#0: *31 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:10:02 [info] 1635#0: *34 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/YmFsbGV0OjIwMTctMTAtMTcgMjE6MjY6MTA=/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:10:05 [info] 1635#0: *31 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/MTBpZGswMToyMDE3LTEwLTExIDA3OjM0OjU0/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:10:05 [error] 1635#0: *32 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:10:54 [info] 1635#0: *33 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/MTBpZGswMToyMDE3LTEwLTExIDA3OjM0OjU0/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:10:55 [info] 1635#0: *32 client 220.112.15.254 closed keepalive connection
+2017/10/19 01:11:28 [warn] 1635#0: *37 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/6/00/0000000006 while reading upstream, client: 220.112.15.254, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 01:11:30 [error] 1635#0: *41 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:11:32 [error] 1635#0: *43 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:11:33 [error] 1635#0: *41 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:11:35 [info] 1635#0: *41 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/MTBpZGswMToyMDE3LTEwLTExIDA3OjM0OjU0/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:11:46 [info] 1635#0: *42 client 220.112.15.254 closed keepalive connection
+2017/10/19 01:12:07 [info] 1635#0: *40 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/MTBpZGswMToyMDE3LTEwLTExIDA3OjM0OjU0/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:12:48 [warn] 1635#0: *45 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/7/00/0000000007 while reading upstream, client: 220.112.15.254, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 01:12:50 [error] 1635#0: *49 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:12:50 [info] 1635#0: *49 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/YmFsbGV0OjIwMTctMTAtMTcgMjE6MjY6MTA=/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:12:50 [error] 1635#0: *50 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:12:52 [error] 1635#0: *44 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:13:14 [info] 1635#0: *48 client 220.112.15.254 closed keepalive connection
+2017/10/19 01:14:19 [warn] 1635#0: *52 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/8/00/0000000008 while reading upstream, client: 220.112.15.254, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 01:14:20 [error] 1635#0: *58 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:14:22 [error] 1635#0: *57 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:14:22 [error] 1635#0: *57 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:15:52 [info] 1635#0: *59 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/YmFsbGV0OjIwMTctMTAtMTcgMjE6MjY6MTA=/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:15:52 [info] 1635#0: *60 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/MTBpZGswMToyMDE3LTEwLTExIDA3OjM0OjU0/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:15:53 [warn] 1635#0: *62 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/9/00/0000000009 while reading upstream, client: 220.112.15.254, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 01:15:53 [info] 1635#0: *61 client 220.112.15.254 closed keepalive connection
+2017/10/19 01:15:56 [error] 1635#0: *65 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:15:58 [error] 1635#0: *62 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:16:46 [info] 1635#0: *65 client 220.112.15.254 closed keepalive connection
+2017/10/19 01:16:47 [info] 1635#0: *62 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/MTBpZGswMToyMDE3LTEwLTExIDA3OjM0OjU0/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:20:35 [warn] 1635#0: *69 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/0/01/0000000010 while reading upstream, client: 220.112.15.254, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 01:20:38 [error] 1635#0: *75 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:20:40 [error] 1635#0: *74 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:20:41 [error] 1635#0: *71 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:20:42 [info] 1635#0: *71 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/YmFsbGV0OjIwMTctMTAtMTcgMjE6MjY6MTA=/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:20:43 [info] 1635#0: *72 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/MTBpZGswMToyMDE3LTEwLTExIDA3OjM0OjU0/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:21:08 [info] 1635#0: *73 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/MTBpZGswMToyMDE3LTEwLTExIDA3OjM0OjU0/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:21:08 [info] 1635#0: *76 client prematurely closed connection while sending response to client, client: 220.112.15.254, server: www.xpiano.com, request: "GET /static/ins/videos_storage/YmFsbGV0OjIwMTctMTAtMTcgMjE6MjY6MTA=/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:21:22 [info] 1635#0: *74 client 220.112.15.254 closed keepalive connection
+2017/10/19 01:21:22 [info] 1635#0: *78 client 220.112.15.254 closed keepalive connection
+2017/10/19 01:21:22 [info] 1635#0: *79 client 220.112.15.254 closed keepalive connection
+2017/10/19 01:21:22 [info] 1635#0: *75 client 220.112.15.254 closed keepalive connection
+2017/10/19 01:21:22 [info] 1635#0: *69 client 220.112.15.254 closed keepalive connection
+2017/10/19 01:21:22 [info] 1635#0: *80 client 220.112.15.254 closed keepalive connection
+2017/10/19 01:26:34 [warn] 1635#0: *85 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/1/01/0000000011 while reading upstream, client: 106.15.218.42, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top", referrer: "http://www.xpiano.top/"
+2017/10/19 01:26:34 [error] 1635#0: *99 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 106.11.144.155, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/"
+2017/10/19 01:26:34 [error] 1635#0: *102 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 106.11.144.157, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/"
+2017/10/19 01:26:44 [info] 1635#0: *100 client prematurely closed connection (104: Connection reset by peer) while sending response to client, client: 106.11.144.139, server: www.xpiano.com, request: "GET /static/ins/videos_storage/YmFsbGV0OjIwMTctMTAtMTcgMjE6MjY6MTA=/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:26:44 [info] 1635#0: *104 client prematurely closed connection (104: Connection reset by peer) while sending response to client, client: 106.11.144.156, server: www.xpiano.com, request: "GET /static/ins/videos_storage/MTBpZGswMToyMDE3LTEwLTExIDA3OjM0OjU0/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 01:27:04 [info] 1635#0: *81 client 106.15.218.24 closed keepalive connection
+2017/10/19 01:27:05 [info] 1635#0: *85 client 106.15.218.42 closed keepalive connection
+2017/10/19 01:27:05 [info] 1635#0: *88 client 106.15.218.14 closed keepalive connection
+2017/10/19 01:27:05 [info] 1635#0: *98 client 106.11.144.144 closed keepalive connection
+2017/10/19 01:27:05 [info] 1635#0: *97 client 106.11.144.153 closed keepalive connection
+2017/10/19 01:27:05 [info] 1635#0: *99 client 106.11.144.155 closed keepalive connection
+2017/10/19 01:27:05 [info] 1635#0: *102 client 106.11.144.157 closed keepalive connection
+2017/10/19 01:27:05 [info] 1635#0: *103 client 106.11.144.154 closed keepalive connection
+2017/10/19 01:27:05 [info] 1635#0: *113 client 106.15.218.2 closed keepalive connection
+2017/10/19 01:27:14 [info] 1635#0: *116 client 106.15.218.48 closed keepalive connection
+2017/10/19 01:27:14 [info] 1635#0: *117 client 106.11.144.150 closed keepalive connection
+2017/10/19 01:27:15 [info] 1635#0: *118 client 182.92.246.166 closed keepalive connection
+2017/10/19 01:27:19 [info] 1635#0: *83 client 106.15.218.50 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *87 client 106.11.144.142 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *89 client 106.15.218.38 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *90 client 106.15.218.12 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *92 client 106.15.218.16 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *91 client 106.11.144.138 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *93 client 106.15.218.29 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *94 client 106.15.218.40 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *95 client 106.15.218.45 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *96 client 106.11.144.152 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *101 client 106.11.144.156 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *105 client 106.11.144.142 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *107 client 106.15.218.12 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *106 client 106.11.144.135 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *108 client 106.11.144.140 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *109 client 106.11.144.134 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *110 client 106.15.218.37 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *111 client 106.15.218.1 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *112 client 106.15.218.9 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *114 client 106.15.218.39 closed keepalive connection
+2017/10/19 01:27:20 [info] 1635#0: *115 client 106.15.218.35 closed keepalive connection
+2017/10/19 01:27:45 [info] 1635#0: *120 client 182.92.246.162 closed keepalive connection
+2017/10/19 01:27:49 [info] 1635#0: *121 client 182.92.246.185 closed keepalive connection
+2017/10/19 01:27:50 [info] 1635#0: *123 client 182.92.246.166 closed keepalive connection
+2017/10/19 01:38:12 [info] 1635#0: *125 client sent invalid request while reading client request line, client: 95.213.187.187, server: www.xpiano.com, request: "CONNECT check.best-proxies.ru:80 HTTP/1.1"
+2017/10/19 03:46:41 [info] 1635#0: *128 client 80.82.78.50 closed keepalive connection (104: Connection reset by peer)
+2017/10/19 07:08:14 [warn] 1635#0: *142 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/2/01/0000000012 while reading upstream, client: 106.11.144.140, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 07:08:45 [info] 1635#0: *147 client 106.11.144.149 closed keepalive connection
+2017/10/19 07:08:45 [info] 1635#0: *148 client 106.11.144.145 closed keepalive connection
+2017/10/19 07:08:46 [info] 1635#0: *149 client 106.11.144.138 closed keepalive connection
+2017/10/19 07:08:46 [info] 1635#0: *152 client 106.11.144.142 closed keepalive connection
+2017/10/19 07:09:00 [info] 1635#0: *138 client 106.11.144.150 closed keepalive connection
+2017/10/19 07:09:00 [info] 1635#0: *140 client 106.11.144.146 closed keepalive connection
+2017/10/19 07:09:00 [info] 1635#0: *142 client 106.11.144.140 closed keepalive connection
+2017/10/19 07:09:01 [info] 1635#0: *150 client 106.11.144.131 closed keepalive connection
+2017/10/19 07:09:01 [info] 1635#0: *151 client 106.11.144.134 closed keepalive connection
+2017/10/19 07:09:01 [info] 1635#0: *153 client 106.11.144.140 closed keepalive connection
+2017/10/19 07:15:44 [info] 1635#0: *154 client sent invalid request while reading client request line, client: 95.213.187.189, server: www.xpiano.com, request: "CONNECT check.best-proxies.ru:80 HTTP/1.1"
+2017/10/19 09:55:17 [info] 1635#0: *159 client sent HTTP/1.1 request without "Host" header while reading client request headers, client: 13.59.116.33, server: www.xpiano.com, request: "GET /w00tw00t.at.ISC.SANS.DFind:) HTTP/1.1"
+2017/10/19 10:00:24 [warn] 1635#0: *164 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/3/01/0000000013 while reading upstream, client: 106.15.218.42, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 10:00:25 [error] 1635#0: *160 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 106.15.218.24, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 10:00:27 [error] 1635#0: *188 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 106.15.218.38, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 10:00:55 [info] 1635#0: *164 client 106.15.218.42 closed keepalive connection
+2017/10/19 10:00:55 [info] 1635#0: *169 client 106.15.218.12 closed keepalive connection
+2017/10/19 10:00:56 [info] 1635#0: *173 client 106.15.218.4 closed keepalive connection
+2017/10/19 10:00:56 [info] 1635#0: *174 client 106.15.218.22 closed keepalive connection
+2017/10/19 10:00:56 [info] 1635#0: *176 client 106.11.144.139 closed keepalive connection
+2017/10/19 10:00:56 [info] 1635#0: *175 client 106.11.144.139 closed keepalive connection
+2017/10/19 10:00:56 [info] 1635#0: *177 client 106.11.144.148 closed keepalive connection
+2017/10/19 10:00:56 [info] 1635#0: *178 client 106.15.218.1 closed keepalive connection
+2017/10/19 10:00:56 [info] 1635#0: *179 client 106.11.144.153 closed keepalive connection
+2017/10/19 10:00:57 [info] 1635#0: *180 client 106.11.144.142 closed keepalive connection
+2017/10/19 10:00:57 [info] 1635#0: *182 client 106.15.218.9 closed keepalive connection
+2017/10/19 10:00:57 [info] 1635#0: *183 client 106.11.144.152 closed keepalive connection
+2017/10/19 10:00:57 [info] 1635#0: *185 client 106.11.144.152 closed keepalive connection
+2017/10/19 10:00:58 [info] 1635#0: *186 client 106.15.218.29 closed keepalive connection
+2017/10/19 10:00:58 [info] 1635#0: *188 client 106.15.218.38 closed keepalive connection
+2017/10/19 10:00:58 [info] 1635#0: *189 client 106.11.144.156 closed keepalive connection
+2017/10/19 10:00:58 [info] 1635#0: *190 client 106.15.218.37 closed keepalive connection
+2017/10/19 10:00:58 [info] 1635#0: *191 client 106.15.218.35 closed keepalive connection
+2017/10/19 10:00:58 [info] 1635#0: *192 client 106.15.218.7 closed keepalive connection
+2017/10/19 10:00:58 [info] 1635#0: *193 client 106.11.144.150 closed keepalive connection
+2017/10/19 10:01:08 [info] 1635#0: *198 client 106.11.144.129 closed keepalive connection
+2017/10/19 10:01:09 [info] 1635#0: *160 client 106.15.218.24 closed keepalive connection
+2017/10/19 10:01:09 [info] 1635#0: *162 client 106.11.144.146 closed keepalive connection
+2017/10/19 10:01:10 [info] 1635#0: *166 client 106.15.218.28 closed keepalive connection
+2017/10/19 10:01:10 [info] 1635#0: *167 client 106.15.218.17 closed keepalive connection
+2017/10/19 10:01:10 [info] 1635#0: *168 client 106.11.144.134 closed keepalive connection
+2017/10/19 10:01:10 [info] 1635#0: *170 client 106.11.144.145 closed keepalive connection
+2017/10/19 10:01:10 [info] 1635#0: *171 client 106.11.144.131 closed keepalive connection
+2017/10/19 10:01:10 [info] 1635#0: *172 client 106.11.144.140 closed keepalive connection
+2017/10/19 10:01:12 [info] 1635#0: *181 client 106.15.218.36 closed keepalive connection
+2017/10/19 10:01:12 [info] 1635#0: *184 client 106.11.144.152 closed keepalive connection
+2017/10/19 10:01:19 [info] 1635#0: *195 client 106.11.144.144 closed keepalive connection
+2017/10/19 10:01:43 [info] 1635#0: *187 client 106.15.218.39 closed keepalive connection
+2017/10/19 10:02:44 [info] 1635#0: *194 client 106.15.218.50 closed keepalive connection
+2017/10/19 10:07:39 [warn] 1635#0: *199 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/4/01/0000000014 while reading upstream, client: 182.92.246.179, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 10:08:09 [info] 1635#0: *199 client 182.92.246.179 closed keepalive connection
+2017/10/19 10:08:10 [info] 1635#0: *201 client 106.11.144.136 closed keepalive connection
+2017/10/19 10:08:10 [info] 1635#0: *202 client 106.11.144.158 closed keepalive connection
+2017/10/19 10:08:10 [info] 1635#0: *203 client 182.92.246.158 closed keepalive connection
+2017/10/19 10:08:13 [info] 1635#0: *204 client 106.11.144.144 closed keepalive connection
+2017/10/19 10:08:24 [info] 1635#0: *206 client 106.11.144.135 closed keepalive connection
+2017/10/19 10:08:24 [info] 1635#0: *208 client 182.92.246.185 closed keepalive connection
+2017/10/19 10:08:25 [info] 1635#0: *210 client 106.11.144.149 closed keepalive connection
+2017/10/19 10:08:25 [info] 1635#0: *211 client 182.92.246.195 closed keepalive connection
+2017/10/19 10:08:25 [info] 1635#0: *212 client 106.11.144.138 closed keepalive connection
+2017/10/19 10:08:25 [info] 1635#0: *213 client 106.11.144.142 closed keepalive connection
+2017/10/19 10:08:25 [info] 1635#0: *214 client 182.92.246.151 closed keepalive connection
+2017/10/19 10:08:25 [info] 1635#0: *215 client 182.92.246.166 closed keepalive connection
+2017/10/19 10:38:05 [info] 1635#0: *219 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:38:05 [info] 1635#0: *223 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:38:05 [info] 1635#0: *227 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:38:06 [info] 1635#0: *231 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:38:06 [info] 1635#0: *235 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:38:06 [info] 1635#0: *239 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:38:06 [info] 1635#0: *243 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:38:06 [info] 1635#0: *247 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:38:06 [info] 1635#0: *251 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:38:06 [info] 1635#0: *255 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:38:10 [info] 1635#0: *257 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST / HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114"
+2017/10/19 10:38:12 [info] 1635#0: *259 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST /showcase/integration/saveGangster.action HTTP/1.0", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:38:12 [info] 1635#0: *261 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST /struts2-showcase/integration/saveGangster.action HTTP/1.0", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:38:23 [info] 1635#0: *265 client 140.205.225.190 closed keepalive connection
+2017/10/19 10:38:38 [info] 1635#0: *267 client 140.205.225.190 closed keepalive connection
+2017/10/19 10:38:45 [info] 1635#0: *271 client 140.205.225.190 closed keepalive connection
+2017/10/19 10:39:00 [info] 1635#0: *273 client 140.205.225.190 closed keepalive connection
+2017/10/19 10:39:13 [warn] 1635#0: *282 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/5/01/0000000015 while reading upstream, client: 140.205.225.190, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:39:13 [info] 1635#0: *286 client sent invalid method while reading client request line, client: 140.205.225.190, server: www.xpiano.com, request: " ò  îYèQ­ry„öYº¹žLþ„Æ˜ìÆŽº!Ó],ò  „À0À,À(À$ÀÀ"
+2017/10/19 10:39:13 [info] 1635#0: *286 recv() failed (104: Connection reset by peer) while reading client request line, client: 140.205.225.190, server: www.xpiano.com, request: " ò  îYèQ­ry„öYº¹žLþ„Æ˜ìÆŽº!Ó],ò  „À0À,À(À$ÀÀ"
+2017/10/19 10:39:13 [info] 1635#0: *287 client sent invalid method while reading client request line, client: 140.205.225.190, server: www.xpiano.com, request: " ò  îYèQ?¸ùkX"˜AŸ¿MÿäÂ¨Ð”Ì¼#‡³?  „À0À,À(À$ÀÀ"
+2017/10/19 10:39:13 [info] 1635#0: *287 recv() failed (104: Connection reset by peer) while reading client request line, client: 140.205.225.190, server: www.xpiano.com, request: " ò  îYèQ?¸ùkX"˜AŸ¿MÿäÂ¨Ð”Ì¼#‡³?  „À0À,À(À$ÀÀ"
+2017/10/19 10:39:20 [info] 1635#0: *275 client 140.205.225.190 closed keepalive connection
+2017/10/19 10:39:45 [info] 1635#0: *296 client 140.205.225.190 closed keepalive connection
+2017/10/19 10:40:09 [info] 1635#0: *299 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.225.190, server: www.xpiano.com, request: "POST /wgaqsuxvthie HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 10:40:12 [warn] 1635#0: *305 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/6/01/0000000016 while reading upstream, client: 140.205.225.190, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80", referrer: "http://39.108.232.114:80/index/"
+2017/10/19 10:40:21 [info] 1635#0: *305 client 140.205.225.190 closed keepalive connection
+2017/10/19 10:40:30 [info] 1635#0: *310 client 140.205.225.190 closed keepalive connection
+2017/10/19 10:40:58 [info] 1635#0: *315 client 140.205.225.190 closed keepalive connection
+2017/10/19 10:47:19 [warn] 1635#0: *326 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/7/01/0000000017 while reading upstream, client: 101.200.101.32, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 10:47:22 [error] 1635#0: *336 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 101.200.101.54, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 10:47:22 [error] 1635#0: *342 open() "/var/www/ins/static/ins/avatar/future.jpg" failed (2: No such file or directory), client: 101.200.101.35, server: www.xpiano.com, request: "GET /static/ins/avatar/future.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 10:47:23 [error] 1635#0: *334 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 101.200.101.44, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 10:47:35 [info] 1635#0: *341 client prematurely closed connection (104: Connection reset by peer) while sending response to client, client: 101.200.101.66, server: www.xpiano.com, request: "GET /static/ins/videos_storage/MTBpZGswMToyMDE3LTEwLTExIDA3OjM0OjU0/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 10:47:50 [info] 1635#0: *324 client 101.200.101.25 closed keepalive connection
+2017/10/19 10:47:50 [info] 1635#0: *331 client 101.200.101.52 closed keepalive connection
+2017/10/19 10:47:50 [info] 1635#0: *332 client 101.200.101.21 closed keepalive connection
+2017/10/19 10:47:52 [info] 1635#0: *335 client 101.200.101.34 closed keepalive connection
+2017/10/19 10:47:52 [info] 1635#0: *336 client 101.200.101.54 closed keepalive connection
+2017/10/19 10:47:52 [info] 1635#0: *337 client 101.200.101.55 closed keepalive connection
+2017/10/19 10:47:52 [info] 1635#0: *338 client 101.200.101.63 closed keepalive connection
+2017/10/19 10:47:52 [info] 1635#0: *339 client 101.200.101.29 closed keepalive connection
+2017/10/19 10:47:52 [info] 1635#0: *340 client 101.200.101.45 closed keepalive connection
+2017/10/19 10:47:53 [info] 1635#0: *348 client 101.200.101.43 closed keepalive connection
+2017/10/19 10:48:04 [info] 1635#0: *322 client 101.200.101.42 closed keepalive connection
+2017/10/19 10:48:05 [info] 1635#0: *326 client 101.200.101.32 closed keepalive connection
+2017/10/19 10:48:05 [info] 1635#0: *328 client 101.200.101.39 closed keepalive connection
+2017/10/19 10:48:05 [info] 1635#0: *329 client 101.200.101.24 closed keepalive connection
+2017/10/19 10:48:05 [info] 1635#0: *330 client 101.200.101.33 closed keepalive connection
+2017/10/19 10:48:07 [info] 1635#0: *334 client 101.200.101.44 closed keepalive connection
+2017/10/19 10:48:07 [info] 1635#0: *342 client 101.200.101.35 closed keepalive connection
+2017/10/19 10:48:08 [info] 1635#0: *343 client 101.200.101.57 closed keepalive connection
+2017/10/19 10:48:08 [info] 1635#0: *344 client 101.200.101.31 closed keepalive connection
+2017/10/19 10:48:08 [info] 1635#0: *345 client 101.200.101.30 closed keepalive connection
+2017/10/19 10:48:08 [info] 1635#0: *346 client 101.200.101.51 closed keepalive connection
+2017/10/19 10:48:08 [info] 1635#0: *347 client 101.200.101.49 closed keepalive connection
+2017/10/19 10:48:09 [info] 1635#0: *349 client 101.200.101.57 closed keepalive connection
+2017/10/19 10:48:09 [info] 1635#0: *350 client 101.200.101.67 closed keepalive connection
+2017/10/19 10:48:09 [info] 1635#0: *351 client 101.200.101.38 closed keepalive connection
+2017/10/19 10:48:22 [info] 1635#0: *333 client 101.200.101.60 closed keepalive connection
+2017/10/19 10:48:26 [info] 1635#0: *352 client 101.200.101.37 closed keepalive connection
+2017/10/19 10:50:11 [info] 1635#0: *356 client 94.102.49.174 closed keepalive connection (104: Connection reset by peer)
+2017/10/19 11:01:40 [info] 1635#0: *358 client 172.82.166.210 closed keepalive connection (104: Connection reset by peer)
+2017/10/19 11:17:33 [warn] 1635#0: *362 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/8/01/0000000018 while reading upstream, client: 182.92.246.179, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 11:17:34 [error] 1635#0: *372 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 106.11.144.155, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 11:17:35 [error] 1635#0: *387 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 182.92.246.184, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 11:18:03 [info] 1635#0: *360 client 182.92.246.154 closed keepalive connection
+2017/10/19 11:18:04 [info] 1635#0: *365 client 106.11.144.140 closed keepalive connection
+2017/10/19 11:18:05 [info] 1635#0: *371 client 106.11.144.142 closed keepalive connection
+2017/10/19 11:18:05 [info] 1635#0: *372 client 106.11.144.155 closed keepalive connection
+2017/10/19 11:18:05 [info] 1635#0: *375 client 182.92.246.155 closed keepalive connection
+2017/10/19 11:18:05 [info] 1635#0: *378 client 106.11.144.147 closed keepalive connection
+2017/10/19 11:18:05 [info] 1635#0: *379 client 106.11.144.146 closed keepalive connection
+2017/10/19 11:18:05 [info] 1635#0: *381 client 182.92.246.159 closed keepalive connection
+2017/10/19 11:18:05 [info] 1635#0: *383 client 106.11.144.152 closed keepalive connection
+2017/10/19 11:18:05 [info] 1635#0: *385 client 182.92.246.173 closed keepalive connection
+2017/10/19 11:18:06 [info] 1635#0: *387 client 182.92.246.184 closed keepalive connection
+2017/10/19 11:18:14 [info] 1635#0: *393 client 182.92.246.186 closed keepalive connection
+2017/10/19 11:18:19 [info] 1635#0: *362 client 182.92.246.179 closed keepalive connection
+2017/10/19 11:18:19 [info] 1635#0: *364 client 182.92.246.167 closed keepalive connection
+2017/10/19 11:18:19 [info] 1635#0: *366 client 182.92.246.172 closed keepalive connection
+2017/10/19 11:18:19 [info] 1635#0: *367 client 106.11.144.145 closed keepalive connection
+2017/10/19 11:18:19 [info] 1635#0: *368 client 182.92.246.192 closed keepalive connection
+2017/10/19 11:18:19 [info] 1635#0: *369 client 106.11.144.134 closed keepalive connection
+2017/10/19 11:18:19 [info] 1635#0: *370 client 182.92.246.166 closed keepalive connection
+2017/10/19 11:18:20 [info] 1635#0: *373 client 106.11.144.139 closed keepalive connection
+2017/10/19 11:18:20 [info] 1635#0: *376 client 182.92.246.185 closed keepalive connection
+2017/10/19 11:18:20 [info] 1635#0: *377 client 106.11.144.157 closed keepalive connection
+2017/10/19 11:18:20 [info] 1635#0: *380 client 106.11.144.150 closed keepalive connection
+2017/10/19 11:18:20 [info] 1635#0: *382 client 106.11.144.144 closed keepalive connection
+2017/10/19 11:18:20 [info] 1635#0: *384 client 106.11.144.156 closed keepalive connection
+2017/10/19 11:18:21 [info] 1635#0: *386 client 182.92.246.176 closed keepalive connection
+2017/10/19 11:18:21 [info] 1635#0: *388 client 182.92.246.157 closed keepalive connection
+2017/10/19 11:18:26 [info] 1635#0: *390 client 182.92.246.196 closed keepalive connection
+2017/10/19 11:18:31 [info] 1635#0: *394 client 106.11.144.154 closed keepalive connection
+2017/10/19 11:19:05 [info] 1635#0: *374 client 106.11.144.139 closed keepalive connection
+2017/10/19 11:19:52 [info] 1635#0: *389 client 182.92.246.169 closed keepalive connection
+2017/10/19 11:20:22 [warn] 1635#0: *396 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/9/01/0000000019 while reading upstream, client: 182.92.246.179, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 11:20:22 [error] 1635#0: *399 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 106.11.144.155, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 11:20:23 [error] 1635#0: *402 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 182.92.246.184, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 11:20:53 [info] 1635#0: *398 client 106.11.144.157 closed keepalive connection
+2017/10/19 11:20:53 [info] 1635#0: *399 client 106.11.144.155 closed keepalive connection
+2017/10/19 11:20:53 [info] 1635#0: *400 client 106.11.144.154 closed keepalive connection
+2017/10/19 11:20:53 [info] 1635#0: *401 client 182.92.246.193 closed keepalive connection
+2017/10/19 11:20:53 [info] 1635#0: *402 client 182.92.246.184 closed keepalive connection
+2017/10/19 11:21:07 [info] 1635#0: *396 client 182.92.246.179 closed keepalive connection
+2017/10/19 11:21:08 [info] 1635#0: *403 client 106.11.144.140 closed keepalive connection
+2017/10/19 11:26:11 [warn] 1635#0: *405 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/0/02/0000000020 while reading upstream, client: 182.92.246.179, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 11:26:11 [error] 1635#0: *408 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 182.92.246.176, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 11:26:11 [error] 1635#0: *409 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 106.11.144.157, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 11:26:42 [info] 1635#0: *407 client 106.11.144.147 closed keepalive connection
+2017/10/19 11:26:42 [info] 1635#0: *408 client 182.92.246.176 closed keepalive connection
+2017/10/19 11:26:42 [info] 1635#0: *411 client 106.11.144.158 closed keepalive connection
+2017/10/19 11:26:56 [info] 1635#0: *405 client 182.92.246.179 closed keepalive connection
+2017/10/19 11:26:57 [info] 1635#0: *409 client 106.11.144.157 closed keepalive connection
+2017/10/19 11:26:57 [info] 1635#0: *410 client 106.11.144.129 closed keepalive connection
+2017/10/19 11:27:01 [info] 1635#0: *412 client 106.11.144.154 closed keepalive connection
+2017/10/19 11:27:02 [info] 1635#0: *414 client 182.92.246.164 closed keepalive connection
+2017/10/19 11:27:02 [info] 1635#0: *415 client 106.11.144.142 closed keepalive connection
+2017/10/19 11:27:03 [info] 1635#0: *416 client 182.92.246.194 closed keepalive connection
+2017/10/19 11:27:04 [info] 1635#0: *417 client 106.11.144.140 closed keepalive connection
+2017/10/19 11:27:04 [info] 1635#0: *418 client 182.92.246.182 closed keepalive connection
+2017/10/19 11:27:04 [info] 1635#0: *419 client 106.11.144.143 closed keepalive connection
+2017/10/19 11:36:42 [info] 1635#0: *422 client 182.92.246.173 closed keepalive connection
+2017/10/19 11:36:56 [info] 1635#0: *420 client 182.92.246.174 closed keepalive connection
+2017/10/19 11:36:57 [info] 1635#0: *424 client 182.92.246.173 closed keepalive connection
+2017/10/19 11:36:57 [info] 1635#0: *425 client 182.92.246.173 closed keepalive connection
+2017/10/19 11:36:57 [info] 1635#0: *426 client 182.92.246.180 closed keepalive connection
+2017/10/19 11:36:57 [warn] 1635#0: *446 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/1/02/0000000021 while reading upstream, client: 182.92.246.179, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top", referrer: "http://www.xpiano.top/home"
+2017/10/19 11:36:57 [info] 1635#0: *427 client 106.11.144.146 closed keepalive connection
+2017/10/19 11:36:57 [info] 1635#0: *428 client 182.92.246.158 closed keepalive connection
+2017/10/19 11:36:58 [info] 1635#0: *451 client prematurely closed connection while sending response to client, client: 182.92.246.195, server: www.xpiano.com, request: "GET /static/ins/images/default.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/home"
+2017/10/19 11:36:58 [error] 1635#0: *441 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 182.92.246.176, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 11:36:59 [error] 1635#0: *458 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 182.92.246.184, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 11:36:59 [info] 1635#0: *429 client 182.92.246.159 closed keepalive connection
+2017/10/19 11:36:59 [info] 1635#0: *430 client 182.92.246.162 closed keepalive connection
+2017/10/19 11:36:59 [info] 1635#0: *431 client 106.11.144.148 closed keepalive connection
+2017/10/19 11:37:11 [info] 1635#0: *471 client 106.11.144.153 closed keepalive connection
+2017/10/19 11:37:20 [info] 1635#0: *435 client 182.92.246.162 closed keepalive connection
+2017/10/19 11:37:23 [warn] 1635#0: *486 a client request body is buffered to a temporary file /usr/local/nginx/client_body_temp/0000000022, client: 182.92.246.176, server: www.xpiano.com, request: "POST /upfile HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/home"
+2017/10/19 11:37:24 [info] 1635#0: *445 client 106.11.144.152 closed keepalive connection
+2017/10/19 11:37:27 [info] 1635#0: *423 client 106.11.144.129 closed keepalive connection
+2017/10/19 11:37:27 [info] 1635#0: *453 client 182.92.246.182 closed keepalive connection
+2017/10/19 11:37:27 [warn] 1635#0: *488 a client request body is buffered to a temporary file /usr/local/nginx/client_body_temp/0000000023, client: 182.92.246.176, server: www.xpiano.com, request: "POST /upfile HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/home"
+2017/10/19 11:37:29 [info] 1635#0: *456 client 182.92.246.163 closed keepalive connection
+2017/10/19 11:37:29 [info] 1635#0: *458 client 182.92.246.184 closed keepalive connection
+2017/10/19 11:37:29 [info] 1635#0: *460 client 182.92.246.166 closed keepalive connection
+2017/10/19 11:37:29 [info] 1635#0: *461 client 182.92.246.177 closed keepalive connection
+2017/10/19 11:37:30 [info] 1635#0: *462 client 182.92.246.157 closed keepalive connection
+2017/10/19 11:37:31 [info] 1635#0: *464 client 182.92.246.154 closed keepalive connection
+2017/10/19 11:37:31 [info] 1635#0: *465 client 106.11.144.140 closed keepalive connection
+2017/10/19 11:37:37 [info] 1635#0: *439 client 182.92.246.178 closed keepalive connection
+2017/10/19 11:37:37 [info] 1635#0: *440 client 182.92.246.194 closed keepalive connection
+2017/10/19 11:37:37 [info] 1635#0: *441 client 182.92.246.176 closed keepalive connection
+2017/10/19 11:37:37 [info] 1635#0: *442 client 182.92.246.183 closed keepalive connection
+2017/10/19 11:37:37 [info] 1635#0: *443 client 182.92.246.191 closed keepalive connection
+2017/10/19 11:37:39 [info] 1635#0: *466 client 182.92.246.190 closed keepalive connection
+2017/10/19 11:37:39 [info] 1635#0: *468 client 182.92.246.168 closed keepalive connection
+2017/10/19 11:37:39 [info] 1635#0: *444 client 106.11.144.141 closed keepalive connection
+2017/10/19 11:37:40 [info] 1635#0: *446 client 182.92.246.179 closed keepalive connection
+2017/10/19 11:37:41 [info] 1635#0: *472 client 106.11.144.157 closed keepalive connection
+2017/10/19 11:37:41 [info] 1635#0: *473 client 182.92.246.155 closed keepalive connection
+2017/10/19 11:37:41 [info] 1635#0: *449 client 106.11.144.138 closed keepalive connection
+2017/10/19 11:37:41 [info] 1635#0: *474 client 106.11.144.147 closed keepalive connection
+2017/10/19 11:37:41 [info] 1635#0: *475 client 182.92.246.149 closed keepalive connection
+2017/10/19 11:37:42 [info] 1635#0: *476 client 182.92.246.189 closed keepalive connection
+2017/10/19 11:37:42 [info] 1635#0: *478 client 106.11.144.142 closed keepalive connection
+2017/10/19 11:37:42 [info] 1635#0: *479 client 182.92.246.173 closed keepalive connection
+2017/10/19 11:37:42 [info] 1635#0: *480 client 182.92.246.187 closed keepalive connection
+2017/10/19 11:37:42 [info] 1635#0: *481 client 106.11.144.153 closed keepalive connection
+2017/10/19 11:37:42 [info] 1635#0: *482 client 106.11.144.154 closed keepalive connection
+2017/10/19 11:37:42 [info] 1635#0: *483 client 182.92.246.193 closed keepalive connection
+2017/10/19 11:37:42 [info] 1635#0: *484 client 106.11.144.146 closed keepalive connection
+2017/10/19 11:37:42 [info] 1635#0: *450 client 106.11.144.155 closed keepalive connection
+2017/10/19 11:37:43 [info] 1635#0: *455 client 182.92.246.161 closed keepalive connection
+2017/10/19 11:37:45 [info] 1635#0: *432 client 182.92.246.185 closed keepalive connection
+2017/10/19 11:37:46 [info] 1635#0: *463 client 106.11.144.156 closed keepalive connection
+2017/10/19 11:37:50 [info] 1635#0: *437 client 106.11.144.135 closed keepalive connection
+2017/10/19 11:37:54 [info] 1635#0: *485 client 106.11.144.144 closed keepalive connection
+2017/10/19 11:37:54 [info] 1635#0: *486 client 182.92.246.176 closed keepalive connection
+2017/10/19 11:37:55 [info] 1635#0: *447 client 106.11.144.145 closed keepalive connection
+2017/10/19 11:37:56 [info] 1635#0: *448 client 182.92.246.186 closed keepalive connection
+2017/10/19 11:37:57 [info] 1635#0: *477 client 182.92.246.188 closed keepalive connection
+2017/10/19 11:37:57 [info] 1635#0: *452 client 182.92.246.151 closed keepalive connection
+2017/10/19 11:37:58 [info] 1635#0: *488 client 182.92.246.176 closed keepalive connection
+2017/10/19 11:37:59 [info] 1635#0: *457 client 182.92.246.156 closed keepalive connection
+2017/10/19 11:38:00 [info] 1635#0: *491 client 182.92.246.166 closed keepalive connection
+2017/10/19 11:38:13 [info] 1635#0: *490 client 106.11.144.143 closed keepalive connection
+2017/10/19 11:39:16 [warn] 1635#0: *493 a client request body is buffered to a temporary file /usr/local/nginx/client_body_temp/0000000024, client: 182.92.246.176, server: www.xpiano.com, request: "POST /upfile HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/home"
+2017/10/19 11:39:19 [warn] 1635#0: *496 a client request body is buffered to a temporary file /usr/local/nginx/client_body_temp/0000000025, client: 106.11.144.149, server: www.xpiano.com, request: "POST /upfile HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/home"
+2017/10/19 11:39:22 [warn] 1635#0: *499 a client request body is buffered to a temporary file /usr/local/nginx/client_body_temp/0000000026, client: 182.92.246.176, server: www.xpiano.com, request: "POST /upfile HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/home"
+2017/10/19 11:39:47 [info] 1635#0: *493 client 182.92.246.176 closed keepalive connection
+2017/10/19 11:39:47 [info] 1635#0: *495 client 106.11.144.130 closed keepalive connection
+2017/10/19 11:39:50 [info] 1635#0: *496 client 106.11.144.149 closed keepalive connection
+2017/10/19 11:39:50 [info] 1635#0: *498 client 182.92.246.166 closed keepalive connection
+2017/10/19 11:39:52 [info] 1635#0: *499 client 182.92.246.176 closed keepalive connection
+2017/10/19 11:39:53 [info] 1635#0: *501 client 182.92.246.184 closed keepalive connection
+2017/10/19 11:40:09 [warn] 1635#0: *513 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/7/02/0000000027 while reading upstream, client: 182.92.246.179, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top", referrer: "http://www.xpiano.top/home"
+2017/10/19 11:40:10 [error] 1635#0: *516 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 182.92.246.184, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 11:40:10 [error] 1635#0: *517 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 182.92.246.176, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 11:40:26 [info] 1635#0: *502 client 182.92.246.156 closed keepalive connection
+2017/10/19 11:40:30 [info] 1635#0: *509 client 106.11.144.155 closed keepalive connection
+2017/10/19 11:40:31 [info] 1635#0: *510 client 182.92.246.180 closed keepalive connection
+2017/10/19 11:40:32 [info] 1635#0: *511 client 106.11.144.150 closed keepalive connection
+2017/10/19 11:40:37 [error] 1635#0: *520 open() "/var/www/ins/static/ins/images_storage/BZEmfbkn3sC/1.jpg" failed (2: No such file or directory), client: 106.11.144.139, server: www.xpiano.com, request: "GET /static/ins/images_storage/BZEmfbkn3sC/1.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/explore"
+2017/10/19 11:40:38 [error] 1635#0: *539 open() "/var/www/ins/static/ins/images_storage/BXHmUqFj9zA/1.jpg" failed (2: No such file or directory), client: 182.92.246.187, server: www.xpiano.com, request: "GET /static/ins/images_storage/BXHmUqFj9zA/1.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/explore"
+2017/10/19 11:40:38 [error] 1635#0: *541 open() "/var/www/ins/static/ins/images_storage/BZg-BJHHEYW/1.jpg" failed (2: No such file or directory), client: 106.11.144.150, server: www.xpiano.com, request: "GET /static/ins/images_storage/BZg-BJHHEYW/1.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/explore"
+2017/10/19 11:40:40 [info] 1635#0: *515 client 106.11.144.143 closed keepalive connection
+2017/10/19 11:40:43 [info] 1635#0: *506 client 106.11.144.154 closed keepalive connection
+2017/10/19 11:40:43 [error] 1635#0: *525 open() "/var/www/ins/static/ins/images_storage/BZWHyoEHyIS/1.jpg" failed (2: No such file or directory), client: 182.92.246.158, server: www.xpiano.com, request: "GET /static/ins/images_storage/BZWHyoEHyIS/1.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/explore"
+2017/10/19 11:40:56 [info] 1635#0: *521 client 182.92.246.157 closed keepalive connection
+2017/10/19 11:40:56 [info] 1635#0: *522 client 182.92.246.182 closed keepalive connection
+2017/10/19 11:41:02 [info] 1635#0: *512 client 182.92.246.192 closed keepalive connection
+2017/10/19 11:41:09 [info] 1635#0: *539 client 182.92.246.187 closed keepalive connection
+2017/10/19 11:41:09 [info] 1635#0: *541 client 106.11.144.150 closed keepalive connection
+2017/10/19 11:41:10 [info] 1635#0: *516 client 182.92.246.184 closed keepalive connection
+2017/10/19 11:41:10 [info] 1635#0: *517 client 182.92.246.176 closed keepalive connection
+2017/10/19 11:41:11 [info] 1635#0: *523 client 106.11.144.132 closed keepalive connection
+2017/10/19 11:41:11 [info] 1635#0: *524 client 106.11.144.129 closed keepalive connection
+2017/10/19 11:41:11 [info] 1635#0: *527 client 182.92.246.171 closed keepalive connection
+2017/10/19 11:41:11 [info] 1635#0: *504 client 106.11.144.135 closed keepalive connection
+2017/10/19 11:41:12 [info] 1635#0: *529 client 106.11.144.149 closed keepalive connection
+2017/10/19 11:41:13 [info] 1635#0: *530 client 182.92.246.185 closed keepalive connection
+2017/10/19 11:41:13 [info] 1635#0: *531 client 106.11.144.141 closed keepalive connection
+2017/10/19 11:41:14 [info] 1635#0: *532 client 182.92.246.186 closed keepalive connection
+2017/10/19 11:41:14 [info] 1635#0: *507 client 106.11.144.136 closed keepalive connection
+2017/10/19 11:41:15 [info] 1635#0: *533 client 182.92.246.185 closed keepalive connection
+2017/10/19 11:41:17 [info] 1635#0: *550 client 182.92.246.193 closed keepalive connection
+2017/10/19 11:41:17 [info] 1635#0: *552 client 182.92.246.172 closed keepalive connection
+2017/10/19 11:41:20 [info] 1635#0: *553 client 182.92.246.173 closed keepalive connection
+2017/10/19 11:41:23 [info] 1635#0: *535 client 106.11.144.157 closed keepalive connection
+2017/10/19 11:41:23 [info] 1635#0: *536 client 182.92.246.177 closed keepalive connection
+2017/10/19 11:41:23 [info] 1635#0: *537 client 182.92.246.174 closed keepalive connection
+2017/10/19 11:41:23 [info] 1635#0: *556 client 182.92.246.178 closed keepalive connection
+2017/10/19 11:41:23 [info] 1635#0: *538 client 182.92.246.155 closed keepalive connection
+2017/10/19 11:41:24 [info] 1635#0: *558 client 106.11.144.142 closed keepalive connection
+2017/10/19 11:41:24 [info] 1635#0: *540 client 106.11.144.148 closed keepalive connection
+2017/10/19 11:41:24 [info] 1635#0: *542 client 106.11.144.130 closed keepalive connection
+2017/10/19 11:41:24 [info] 1635#0: *543 client 106.11.144.131 closed keepalive connection
+2017/10/19 11:41:24 [info] 1635#0: *513 client 182.92.246.179 closed keepalive connection
+2017/10/19 11:41:25 [info] 1635#0: *544 client 106.11.144.152 closed keepalive connection
+2017/10/19 11:41:25 [info] 1635#0: *545 client 182.92.246.169 closed keepalive connection
+2017/10/19 11:41:25 [info] 1635#0: *518 client 106.11.144.134 closed keepalive connection
+2017/10/19 11:41:25 [info] 1635#0: *546 client 182.92.246.159 closed keepalive connection
+2017/10/19 11:41:26 [info] 1635#0: *547 client 182.92.246.180 closed keepalive connection
+2017/10/19 11:41:26 [info] 1635#0: *520 client 106.11.144.139 closed keepalive connection
+2017/10/19 11:41:26 [info] 1635#0: *526 client 106.11.144.147 closed keepalive connection
+2017/10/19 11:41:26 [info] 1635#0: *525 client 182.92.246.158 closed keepalive connection
+2017/10/19 11:41:26 [info] 1635#0: *528 client 106.11.144.156 closed keepalive connection
+2017/10/19 11:41:27 [info] 1635#0: *548 client 106.11.144.131 closed keepalive connection
+2017/10/19 11:41:28 [info] 1635#0: *549 client 182.92.246.149 closed keepalive connection
+2017/10/19 12:50:35 [info] 1635#0: *562 client sent HTTP/1.1 request without "Host" header while reading client request headers, client: 122.194.13.97, server: www.xpiano.com, request: "GET /w00tw00t.at.ISC.SANS.DFind:) HTTP/1.1"
+2017/10/19 12:59:13 [info] 1635#0: *563 client sent invalid request while reading client request line, client: 95.213.187.190, server: www.xpiano.com, request: "CONNECT check.best-proxies.ru:80 HTTP/1.1"
+2017/10/19 15:39:26 [info] 1635#0: *564 epoll_wait() reported that client prematurely closed connection, so upstream connection is closed too (104: Connection reset by peer) while connecting to upstream, client: 101.236.36.122, server: www.xpiano.com, request: "GET / HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.meridiangroups.com"
+2017/10/19 16:46:29 [warn] 1635#0: *570 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/8/02/0000000028 while reading upstream, client: 101.200.101.32, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 16:46:30 [error] 1635#0: *582 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 101.200.101.54, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 16:46:31 [error] 1635#0: *578 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 101.200.101.44, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 16:46:36 [info] 1635#0: *591 client prematurely closed connection (104: Connection reset by peer) while sending response to client, client: 101.200.101.66, server: www.xpiano.com, request: "GET /static/ins/videos_storage/MTBpZGswMToyMDE3LTEwLTExIDA3OjM0OjU0/1.mp4 HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 16:46:43 [warn] 1635#0: *609 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/9/02/0000000029 while reading upstream, client: 106.11.144.140, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top", referrer: ""
+2017/10/19 16:46:44 [error] 1635#0: *622 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 106.11.144.155, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 16:46:44 [error] 1635#0: *631 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 106.11.144.157, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 16:47:00 [info] 1635#0: *572 client 101.200.101.33 closed keepalive connection
+2017/10/19 16:47:00 [info] 1635#0: *574 client 101.200.101.52 closed keepalive connection
+2017/10/19 16:47:00 [info] 1635#0: *575 client 101.200.101.24 closed keepalive connection
+2017/10/19 16:47:00 [info] 1635#0: *576 client 101.200.101.21 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *577 client 101.200.101.60 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *579 client 101.200.101.63 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *580 client 101.200.101.55 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *582 client 101.200.101.54 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *583 client 101.200.101.29 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *584 client 101.200.101.39 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *585 client 101.200.101.30 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *586 client 101.200.101.45 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *587 client 101.200.101.34 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *588 client 101.200.101.49 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *589 client 101.200.101.53 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *590 client 101.200.101.31 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *592 client 101.200.101.58 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *593 client 101.200.101.51 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *594 client 101.200.101.43 closed keepalive connection
+2017/10/19 16:47:01 [info] 1635#0: *595 client 101.200.101.57 closed keepalive connection
+2017/10/19 16:47:02 [info] 1635#0: *596 client 101.200.101.67 closed keepalive connection
+2017/10/19 16:47:02 [info] 1635#0: *597 client 101.200.101.35 closed keepalive connection
+2017/10/19 16:47:02 [info] 1635#0: *598 client 101.200.101.38 closed keepalive connection
+2017/10/19 16:47:02 [info] 1635#0: *599 client 101.200.101.28 closed keepalive connection
+2017/10/19 16:47:02 [info] 1635#0: *600 client 101.200.101.38 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *566 client 101.200.101.42 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *611 client 106.11.144.131 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *613 client 106.11.144.138 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *614 client 106.11.144.149 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *615 client 106.11.144.145 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *616 client 106.11.144.142 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *617 client 106.11.144.140 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *618 client 106.11.144.144 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *619 client 106.11.144.139 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *620 client 106.11.144.153 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *621 client 106.11.144.137 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *622 client 106.11.144.155 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *623 client 106.11.144.148 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *624 client 106.11.144.154 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *625 client 106.11.144.132 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *626 client 106.11.144.130 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *627 client 106.11.144.156 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *628 client 106.11.144.156 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *629 client 106.11.144.156 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *630 client 106.11.144.158 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *631 client 106.11.144.157 closed keepalive connection
+2017/10/19 16:47:14 [info] 1635#0: *568 client 101.200.101.25 closed keepalive connection
+2017/10/19 16:47:15 [info] 1635#0: *570 client 101.200.101.32 closed keepalive connection
+2017/10/19 16:47:15 [info] 1635#0: *573 client 101.200.101.39 closed keepalive connection
+2017/10/19 16:47:16 [info] 1635#0: *578 client 101.200.101.44 closed keepalive connection
+2017/10/19 16:47:16 [info] 1635#0: *581 client 101.200.101.54 closed keepalive connection
+2017/10/19 16:47:28 [info] 1635#0: *605 client 106.11.144.150 closed keepalive connection
+2017/10/19 16:47:29 [info] 1635#0: *607 client 106.11.144.146 closed keepalive connection
+2017/10/19 16:47:29 [info] 1635#0: *609 client 106.11.144.140 closed keepalive connection
+2017/10/19 16:47:29 [info] 1635#0: *612 client 106.11.144.134 closed keepalive connection
+2017/10/19 16:49:44 [info] 1635#0: *634 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 16:49:44 [info] 1635#0: *638 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 16:49:44 [info] 1635#0: *642 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 16:49:44 [info] 1635#0: *646 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 16:49:44 [info] 1635#0: *650 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 16:49:45 [info] 1635#0: *654 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 16:49:45 [info] 1635#0: *658 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 16:49:45 [info] 1635#0: *662 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 16:49:45 [info] 1635#0: *666 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 16:49:45 [info] 1635#0: *670 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST /phpmyadmin/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 16:51:50 [info] 1635#0: *672 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST / HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114"
+2017/10/19 16:53:34 [info] 1635#0: *674 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST /showcase/integration/saveGangster.action HTTP/1.0", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 16:53:34 [info] 1635#0: *676 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST /struts2-showcase/integration/saveGangster.action HTTP/1.0", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 16:53:42 [info] 1635#0: *680 client 140.205.201.37 closed keepalive connection
+2017/10/19 16:55:26 [warn] 1635#0: *686 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/0/03/0000000030 while reading upstream, client: 140.205.201.37, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 16:55:26 [info] 1635#0: *690 client sent invalid method while reading client request line, client: 140.205.201.37, server: www.xpiano.com, request: " ò  îYèh~Ë$M{Ïç\%Ÿ»ìÊÀ²¬ÁDìÓ¨>‘ØXq  „À0À,À(À$ÀÀ"
+2017/10/19 16:55:26 [info] 1635#0: *690 recv() failed (104: Connection reset by peer) while reading client request line, client: 140.205.201.37, server: www.xpiano.com, request: " ò  îYèh~Ë$M{Ïç\%Ÿ»ìÊÀ²¬ÁDìÓ¨>‘ØXq  „À0À,À(À$ÀÀ"
+2017/10/19 16:55:26 [info] 1635#0: *691 client sent invalid method while reading client request line, client: 140.205.201.37, server: www.xpiano.com, request: " ò  îYèh~ÄºMY¼‚5‘û$Í^Æ:ßã“çWe=  „À0À,À(À$ÀÀ"
+2017/10/19 16:55:26 [info] 1635#0: *691 recv() failed (104: Connection reset by peer) while reading client request line, client: 140.205.201.37, server: www.xpiano.com, request: " ò  îYèh~ÄºMY¼‚5‘û$Í^Æ:ßã“çWe=  „À0À,À(À$ÀÀ"
+2017/10/19 16:55:42 [info] 1635#0: *692 client 140.205.201.37 closed keepalive connection
+2017/10/19 16:56:55 [info] 1635#0: *694 client 140.205.201.37 closed keepalive connection
+2017/10/19 16:57:28 [info] 1635#0: *696 client 140.205.201.37 closed keepalive connection
+2017/10/19 16:58:55 [info] 1635#0: *698 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:02:48 [info] 1635#0: *700 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:03:03 [info] 1635#0: *702 recv() failed (104: Connection reset by peer) while sending to client, client: 140.205.201.37, server: www.xpiano.com, request: "POST /cwtdqzlrjabe HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80"
+2017/10/19 17:04:54 [info] 1635#0: *708 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:06:02 [info] 1635#0: *710 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:07:28 [info] 1635#0: *712 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:14:43 [info] 1635#0: *714 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:15:35 [info] 1635#0: *716 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:16:15 [info] 1635#0: *718 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:17:23 [info] 1635#0: *724 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:17:33 [info] 1635#0: *726 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:20:18 [info] 1635#0: *730 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:20:25 [info] 1635#0: *732 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:20:32 [warn] 1635#0: *734 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/1/03/0000000031 while reading upstream, client: 140.205.201.37, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "39.108.232.114:80", referrer: "http://39.108.232.114:80/index/"
+2017/10/19 17:20:37 [info] 1635#0: *734 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:21:06 [info] 1635#0: *736 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:21:35 [info] 1635#0: *738 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:21:42 [info] 1635#0: *740 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:21:51 [info] 1635#0: *742 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:22:02 [info] 1635#0: *745 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:22:06 [info] 1635#0: *747 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:22:11 [info] 1635#0: *749 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:22:15 [info] 1635#0: *751 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:22:35 [info] 1635#0: *753 client 140.205.201.37 closed keepalive connection
+2017/10/19 17:29:33 [info] 1635#0: *756 client 106.11.144.135 closed keepalive connection
+2017/10/19 17:29:33 [info] 1635#0: *758 client 106.11.144.154 closed keepalive connection
+2017/10/19 17:50:14 [warn] 1635#0: *764 an upstream response is buffered to a temporary file /usr/local/nginx/uwsgi_temp/2/03/0000000032 while reading upstream, client: 182.92.246.179, server: www.xpiano.com, request: "GET /index/ HTTP/1.1", upstream: "uwsgi://127.0.0.1:8000", host: "www.xpiano.top"
+2017/10/19 17:50:14 [error] 1635#0: *774 open() "/var/www/ins/static/ins/avatar/ballet.jpg" failed (2: No such file or directory), client: 106.11.144.155, server: www.xpiano.com, request: "GET /static/ins/avatar/ballet.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 17:50:15 [error] 1635#0: *779 open() "/var/www/ins/static/ins/avatar/glitterdeath.jpg" failed (2: No such file or directory), client: 106.11.144.157, server: www.xpiano.com, request: "GET /static/ins/avatar/glitterdeath.jpg HTTP/1.1", host: "www.xpiano.top", referrer: "http://www.xpiano.top/index/"
+2017/10/19 17:50:44 [info] 1635#0: *762 client 182.92.246.154 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *766 client 106.11.144.139 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *767 client 182.92.246.151 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *768 client 182.92.246.156 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *769 client 106.11.144.153 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *770 client 106.11.144.144 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *771 client 182.92.246.158 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *772 client 182.92.246.172 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *773 client 182.92.246.177 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *774 client 106.11.144.155 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *775 client 182.92.246.193 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *776 client 182.92.246.153 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *777 client 106.11.144.154 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *778 client 182.92.246.171 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *779 client 106.11.144.157 closed keepalive connection
+2017/10/19 17:50:45 [info] 1635#0: *780 client 182.92.246.166 closed keepalive connection
+2017/10/19 17:50:59 [info] 1635#0: *764 client 182.92.246.179 closed keepalive connection
+2017/10/19 18:36:08 [info] 1635#0: *782 client sent invalid request while reading client request line, client: 5.178.86.75, server: www.xpiano.com, request: "CONNECT check.best-proxies.ru:80 HTTP/1.1"
+2017/10/19 18:36:09 [info] 1635#0: *782 recv() failed (104: Connection reset by peer) while reading client request line, client: 5.178.86.75, server: www.xpiano.com, request: "CONNECT check.best-proxies.ru:80 HTTP/1.1"

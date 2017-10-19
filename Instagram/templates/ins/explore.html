@@ -4,10 +4,13 @@
 {% block js %}
     <script type="text/javascript">
     $(document).ready(function () {
-        $('.article img').error(function(){
-				$(this).parents('.article').remove();
+	
+
+	$('.article img').error(function(){
+				$(this).attr('src','/static/ins/images/article_error.jpg')
         });
 
+	
         $('.rc_con img').error(function(){
             $(this).attr('src','/static/ins/images/default_avatar.png')
         });
@@ -531,7 +534,7 @@
 	}
 
 	.v_icon{
-		background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/8ab5506869d8.png);
+	    background-image: url(/static/ins/images/icons.png);
 	    background-position: -434px -226px;
 	    height: 18px;
 	    width: 18px;
@@ -1034,7 +1037,7 @@
                         </div>
                         <div class="d_right">
                             <header>
-                                <a href="" onclick="return false"><img class="dr_avatar" src="https://ig-s-b-a.akamaihd.net/h-ak-igx/t51.2885-19/s150x150/13584007_989143094533737_1993387861_a.jpg" alt=""></a>
+                                <a href="" onclick="return false"><img class="dr_avatar" src="" alt=""></a>
                                 <a class="dr_name" href="" >kingjames</a>
                                 <span class="dr_ver"></span>
                                 <span><button class="like">关注</button></span>

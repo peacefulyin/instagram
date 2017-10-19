@@ -5,16 +5,17 @@ from django.views.generic import RedirectView
 
 
 urlpatterns = [
+    url(r'^$',RedirectView.as_view(url='/index')),
     url(r'index/$',views.index),
     url(r'qweasd/(.*)$',views.qweasd),
     url(r'blog/(.*)$',views.blog),
     url(r'login$',views.login),
     url(r'home$',views.home),
     url(r'article/delete/(.*)$',views.delete_article),
-    url(r'explore_more/(.*)',views.explore_more),
+    url(r'explore_more/(.*)$',views.explore_more),
     url(r'explore/recently$',views.recently),
-    url(r'explore/search/(.*)',views.explore_search),
-    url(r'explore/(.*?)/(.*)',views.blog_more),
+    url(r'explore/search/(.*)$',views.explore_search),
+    url(r'explore/(.*?)/(.*)$',views.blog_more),
     url(r'account/edit$',views.edit),
     url(r'account/chpass$',views.chpass),
     url(r'account/chpass/backend$',views.chpass_backend),

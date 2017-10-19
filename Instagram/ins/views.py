@@ -30,6 +30,7 @@ import sys
 signup_logger = logger(logname='ins_signup', filename='ins_signup.log', level=logging.INFO)
 pub_logger = logger(logname='ins_pub', filename='ins_pub.log', level=logging.INFO)
 signin_logger = logger(logname='ins_signin', filename='ins_signin.log', level=logging.INFO)
+static_path = '/var/www/ins/'
 
 def veti_logi(f):
     def warp(request, *args):
@@ -256,7 +257,6 @@ def explore(request):
     return render(request, 'ins/explore.html', context)
 
 def qweasd(request, pagenum):
-    print pagenum
 
     articles = InsArticle.objects.all()
     paginator = Paginator(articles, 10)
@@ -289,9 +289,9 @@ def qweasd(request, pagenum):
                     dict['islike'] = 'false'
 
             if dict['type'] == 'image':
-                path = 'static/ins/images_storage/' + dict['shortcode']
+                path = static_path + 'static/ins/images_storage/' + dict['shortcode']
             else:
-                path = 'static/ins/videos_storage/' + dict['shortcode']
+                path = static_path + 'static/ins/videos_storage/' + dict['shortcode']
             img_total = len(os.listdir(path))
             dict['img_total'] = img_total
             tem_list.append(dict)
@@ -300,23 +300,32 @@ def qweasd(request, pagenum):
     else:
         return JsonResponse({'empty': 'true'})
 
+
 def explore_more(request, pagenum):
     articles = InsArticle.objects.all().order_by('-pub_time')
     paginator = Paginator(articles, 24)
     if int(pagenum) <= paginator.num_pages:
         page = paginator.page(int(pagenum))
-        list = [model_to_dict(each) for each in page]
+        article_list = [model_to_dict(each) for each in page]
         tem_list = []
-        for each in list:
-            path = 'static/ins/images_storage/' + each['shortcode']
-            img_total = len(os.listdir(path))
-            each.setdefault('img_total',img_total)
-            tem_list.append(each)
-        list = tem_list
-        return JsonResponse({'page': list,'empty': 'false'})
+        for each in article_list:
+            try:
+                path = static_path + 'static/ins/images_storage/' + each['shortcode']
+                img_total = len(os.listdir(path))
+                each.setdefault('img_total',img_total)
+                tem_list.append(each)
+            except:
+		each.setdefault('img_total', 1)
+                tem_list.append(each)
+
+
+        article_list = tem_list
+        return JsonResponse({'page': article_list,'empty': 'false'})
 
     else:
         return JsonResponse({'empty': 'true'})
+
+
 
 def blog(request, username):
     try:
@@ -515,15 +524,19 @@ def show_detail(request, shortcode, pagenum):
     target_username = article.user.username
 
     login_username = request.COOKIES.get('islogin')
-    login_user = InsUser.objects.get(username=login_username)
-    targetuser = InsUser.objects.get(username=target_username)
-    friend = InsFriend.objects.filter(people=login_user,target=targetuser)
-    isfriend = 'true' if friend else 'false'
 
-    like = InsLike.objects.filter(user=login_user, article=article)
-    islike = 'true' if like else 'false'
+    if login_username:
+        login_user = InsUser.objects.get(username=login_username)
+        targetuser = InsUser.objects.get(username=target_username)
+        friend = InsFriend.objects.filter(people=login_user,target=targetuser)
+        isfriend = 'true' if friend else 'false'
+        like = InsLike.objects.filter(user=login_user, article=article)
+        islike = 'true' if like else 'false'
+    else:
+        isfriend = 'false'
+        islike = 'false'
 
-    filepath = 'static/ins/images_storage/' + shortcode
+    filepath = static_path + 'static/ins/images_storage/' + shortcode
     images = os.listdir(filepath)
 
 
@@ -682,9 +695,9 @@ def upfile(request):
     if request.method == 'POST':
         shortcode =  request.POST.get('shortcode')
         mediatype = request.POST.get('mediatype')
-
+        print mediatype*100
         if mediatype == 'image':
-            path = 'static/ins/images_storage_temp/' + shortcode
+            path = static_path + 'static/ins/images_storage_temp/' + shortcode
 
             if not os.path.exists(path):
                 os.mkdir(path)
@@ -727,24 +740,25 @@ def upfile(request):
                     background.save(outfullpath, 'JPEG', quality=80)
 
                 os.remove(fullpath)
-
-            return JsonResponse({'true': 'ok','imgpath':outfullpath,'filenum':filenum,'shortcode':shortcode})
+            imgpath = outfullpath.replace(static_path, '')
+            return JsonResponse({'true': 'ok','imgpath':imgpath,'filenum':filenum,'shortcode':shortcode})
 
         elif mediatype == 'video':
-            path = 'static/ins/videos_storage_temp/' + shortcode
-
+            path = static_path + 'static/ins/videos_storage_temp/' + shortcode
+	    print path
             if not os.path.exists(path):
                 os.mkdir(path)
+		
 
             file = request.FILES['upfile']
-
+	
             if not file:
                 return JsonResponse({'false': 'upload fail'})
 
             tail = str(file).split('.').pop()
             outfullpath = os.path.join(path,'1.' + tail)
-
-
+	
+	    print outfullpath
 
             with open(outfullpath, 'wb') as f:
                 while True:
@@ -762,22 +776,24 @@ def upfile(request):
                 os.remove(outfullpath)
                 outfullpath = reverpath # turn its back
 
-            imgpath = 'static/ins/images_storage_temp/' + shortcode
+            imgpath = static_path + 'static/ins/images_storage_temp/' + shortcode
 
             if not os.path.exists(imgpath):
                 os.mkdir(imgpath)
 
-            imgcrop_cmd = 'ffmpeg -ss 00:00:14 -i {} -frames:v 1 {}/1.jpg'.format(outfullpath, imgpath)
+            imgcrop_cmd = 'ffmpeg -ss 00:00:02 -i {} -frames:v 1 {}/1.jpg'.format(outfullpath, imgpath)
             imgpipe = subprocess.Popen(imgcrop_cmd, shell=True)
             imgpipe.wait()
 
-            return JsonResponse({'true': 'ok', 'videopath': outfullpath, 'filenum': '1', 'shortcode': shortcode})
+            videopath = outfullpath.replace(static_path,'')
+	    print videopath
+            return JsonResponse({'true': 'ok', 'videopath': videopath, 'filenum': '1', 'shortcode': shortcode})
 
 
 def up_avatar(request):
     username = request.COOKIES.get('islogin')
     file = request.FILES['avatar_file']
-    path = 'static/ins/avatar/{}.jpg'.format(username)
+    path = static_path + 'static/ins/avatar/{}.jpg'.format(username)
     print path
     with open(path, 'wb') as f:
         while True:
@@ -797,7 +813,7 @@ def up_avatar(request):
 def delete_temp(request, code, mediatype):
     if mediatype == 'image':
         shortcode,filenum = code.split(':')
-        filepath = 'static/ins/images_storage_temp/{}/{}.jpg'.format(shortcode,filenum)
+        filepath = static_path + 'static/ins/images_storage_temp/{}/{}.jpg'.format(shortcode,filenum)
         try:
             os.remove(filepath)
         except:
@@ -805,8 +821,8 @@ def delete_temp(request, code, mediatype):
         return JsonResponse({'true':'succeed to delete'})
     elif mediatype == 'video':
         shortcode, filenum = code.split(':')
-        filepath = 'static/ins/videos_storage_temp/{}/{}.mp4'.format(shortcode, filenum)
-        imgfilepath = 'static/ins/images_storage_temp/{}/{}.jpg'.format(shortcode, filenum)
+        filepath = static_path + 'static/ins/videos_storage_temp/{}/{}.mp4'.format(shortcode, filenum)
+        imgfilepath = static_path + 'static/ins/images_storage_temp/{}/{}.jpg'.format(shortcode, filenum)
         try:
             os.remove(filepath)
             os.remove(imgfilepath)
@@ -834,18 +850,18 @@ def savefile(request):
     crop_target_path = False
     if mediatype == 'image':
         article.type = 'image'
-        dir_path = 'static/ins/images_storage_temp/' + shortcode
-        target_path = 'static/ins/images_storage/' + shortcode
+        dir_path = static_path + 'static/ins/images_storage_temp/' + shortcode
+        target_path = static_path + 'static/ins/images_storage/' + shortcode
 
         shutil.copytree(dir_path, target_path)
     else:
         article.type = 'video'
-        dir_path = 'static/ins/videos_storage_temp/' + shortcode
-        target_path = 'static/ins/videos_storage/' + shortcode
+        dir_path = static_path + 'static/ins/videos_storage_temp/' + shortcode
+        target_path = static_path + 'static/ins/videos_storage/' + shortcode
         shutil.copytree(dir_path, target_path)
 
-        crop_path = 'static/ins/images_storage_temp/' + shortcode
-        crop_target_path = 'static/ins/images_storage/' + shortcode
+        crop_path = static_path + 'static/ins/images_storage_temp/' + shortcode
+        crop_target_path = static_path + 'static/ins/images_storage/' + shortcode
 
         shutil.copytree(crop_path, crop_target_path)
 
@@ -864,12 +880,12 @@ def delete_article(request, shortcode):
     article = InsArticle.objects.get(shortcode=shortcode)
     if article.user == user:
         if article.type == 'image':
-            image_path = 'static/ins/images_storage/' + shortcode
+            image_path = static_path + 'static/ins/images_storage/' + shortcode
             if os.path.exists(image_path):
                 shutil.rmtree(image_path)
         else:
-            image_path = 'static/ins/images_storage/' + shortcode
-            video_path = 'static/ins/videos_storage/' + shortcode
+            image_path = static_path + 'static/ins/images_storage/' + shortcode
+            video_path = static_path + 'static/ins/videos_storage/' + shortcode
             if os.path.exists(image_path):
                 shutil.rmtree(image_path)
             if os.path.exists(video_path):
@@ -887,10 +903,10 @@ def unload(request, shortcode, mediatype):
     crop_path = False
 
     if mediatype == 'image':
-        path = 'static/ins/images_storage_temp/' + shortcode
+        path = static_path + 'static/ins/images_storage_temp/' + shortcode
     else:
-        path = 'static/ins/videos_storage_temp/' + shortcode
-        crop_path = 'static/ins/images_storage_temp/' + shortcode
+        path = static_path + 'static/ins/videos_storage_temp/' + shortcode
+        crop_path = static_path + 'static/ins/images_storage_temp/' + shortcode
 
 
     if os.path.exists(path):
@@ -917,39 +933,32 @@ def gen_captcha():
     return captcha
 
 
+
+
+
+
+from task import send_email_inner
+email_logger = logger(logname='ins_email', filename='ins_email.log', level=logging.INFO)
+
 def send_email(request, email):
-    def send_email_inner():
-        captcha = gen_captcha()
-        my_sender = 'yinweiqiab@163.com'
-        my_user = email
-        server = smtplib.SMTP("smtp.163.com", 25)
-        server.login(my_sender, "JohnSnow@321")
-        html = '<html><body><div><h1>验证码</h1></div><div><h2>{}</h2></div></body></html>'.format(captcha)
-        msg = MIMEText(html, 'html', 'utf-8')
-        msg['From'] = formataddr(["ins", my_sender])
-        msg['To'] = formataddr(["my friend", my_user])
-        msg['subject'] = Header(u'ins验证码')
-        try:
-            server.sendmail(my_sender, my_user, msg.as_string())
-        except smtplib.SMTPException:
-            return JsonResponse({'false': '未知错误'})
-        server.quit()
-
-        request.session['captcha'] = captcha
-        request.session['email_time'] = time.time()
-
-        return JsonResponse({'true':'验证码已发送'})
-
+    email_logger.info(email)    
+    captcha = gen_captcha()
+    my_user = email
     try:
         email_time = request.session['email_time']
         if time.time() - email_time > 60:
-            response = send_email_inner()
-            return response
+            send_email_inner.delay(email, captcha)
+            request.session['captcha'] = captcha
+            request.session['email_time'] = time.time()
+            return JsonResponse({'true': '验证码已发送'})
         else:
+            email_logger.info('60')
             return JsonResponse({'false':'请等待60s'})
     except:
-        response = send_email_inner()
-        return response
+        send_email_inner.delay(email, captcha)
+	request.session['captcha'] = captcha
+        request.session['email_time'] = time.time()
+        return JsonResponse({'true': '验证码已发送'})
 
 
 def reset_pass_confirm(request):
@@ -958,7 +967,6 @@ def reset_pass_confirm(request):
     newpass = request.POST.get('newpass')
     confirm_newpass = request.POST.get('confirm_newpass')
 
-    print request.session['captcha']
     if newpass != confirm_newpass:
         return JsonResponse({'false': '两次密码不一致'})
     if captcha != request.session['captcha']:
