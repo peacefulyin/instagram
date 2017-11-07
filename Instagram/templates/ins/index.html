@@ -326,7 +326,6 @@
                     $.get('/qweasd/' + Number(now_article_page + 1), function (dict) {
                         $.each(dict.page, function (index, item) {
                             var ar_clone = $('.article:eq(0)').clone(true);
-                            console.info(ar_clone)
                             ar_clone.removeClass('article_clone');
                             ar_clone.css('display', 'block');
                             ar_clone.attr('id', item.shortcode);
@@ -355,10 +354,14 @@
                                 ar_clone.find('.a_img_con video_con video').attr("src", "/static/ins/videos_storage/" + item.shortcode + "/1.mp4");
                             }
 
-
-                            if (item.islike == 'false') {
+			    if($.cookie('islogin')){
+                                if(item.islike == 'false'){
+                                    ar_clone.find('.heart').removeClass('heart_active');
+                                }
+                            }else{
                                 ar_clone.find('.heart').removeClass('heart_active');
                             }
+	
 
                             ar_clone.find('.author_name').attr('href', '/blog/' + item.user.username);
                             ar_clone.find('.author_name').text(item.user.username);
@@ -371,7 +374,7 @@
 
                             $.each(item.comments.reverse(), function (index, item) {
                                 if (index < 5) {
-                                    var clone_comment = $('.comment_clone:eq(0)').clone(true);
+				    var clone_comment = $('.af_cm_con:eq(0)').parents('li:eq(0)').clone(true);
                                     clone_comment.removeClass('comment_clone');
                                     clone_comment.css('display', 'inline');
                                     clone_comment.find('.ac_name').attr('href', '/blog/' + item.username);
